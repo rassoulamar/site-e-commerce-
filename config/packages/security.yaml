@@ -6,7 +6,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
+        provider_database:
             entity:
                 class: App\Entity\User
                 property: email
@@ -16,6 +16,12 @@ security:
             security: false
         main:
             anonymous: true
+            provider: provider_database
+            form_login:
+                login_path: security_login
+                check_path: security_login
+            logout:
+                path: security_logout
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

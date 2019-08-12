@@ -19,11 +19,13 @@ class HomeController extends AbstractController
         $categories =$categorieRepository->findAll();
         $products = $productRepository->findAll();
         dump($products);
+        $nombre =count($products);
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'categories'=>$categories,
             'products'=>$products,
+            'nombre'=>$nombre,
         ]);
     }
 }
@@ -41,7 +43,7 @@ class HomeController extends AbstractController
 
         dump($list_productDetails);
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/register.html.twig', [
             'all_productDetails' => $all_productDetails,
             'list_productDetails' => $list_productDetails,
             'controller_name' => 'HomeController',

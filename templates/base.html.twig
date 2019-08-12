@@ -78,26 +78,30 @@ $(document).ready(function() {
 							<button type="button" class="btn btn-light  dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-bars"></i> Categories</button>
 							<div class="dropdown-menu">
 								<div class="navbar-nav mr-auto">
-									{% for categorie in categories %}
-										<a class="dropdown-item" href="{{ categorie.name }}"> {{ categorie.name }}</a>
-
-									{% endfor %}
+									<a class="dropdown-item" href=""> Smartphone </a>
+									<a class="dropdown-item" href=""> Tablette </a>
+									<a class="dropdown-item" href=""> Laptop </a>
+									<a class="dropdown-item" href=""> Accesoires </a>
+									<a class="dropdown-item" href=""> Pièces détachées </a>
+									<a class="dropdown-item" href=""> Plus de produits </a>
 								</div>
 
 							</div>
 						</div>
 					</div>
 
-
+					<!-- ================== CATEGORIE LISTE DE LA RECHERCHE ================ -->
 					<div class="col-lg-11-24 col-sm-8">
 						<form action="#" class="py-1">
 							<div class="input-group w-100">
 								<select class="custom-select"  name="category_name">
-									{% for categorie in categories %}
-										<option value=""> {{ categorie.name }}</option>
-
-									{% endfor %}
-
+									<option value=""> Dans tout le site</option>
+									<option value=""> Smartphone</option>
+									<option value=""> Tabelette</option>
+									<option value=""> Laptop</option>
+									<option value=""> Accessoire</option>
+									<option value=""> Pièces détachées</option>
+									<option value=""> Plus de produits</option>
 								</select>
 								<input type="text" class="form-control" style="width:40%;" placeholder="Recherche">
 								<div class="input-group-append">
@@ -121,22 +125,35 @@ $(document).ready(function() {
 											</div>
 										</div>
 									</a>
+									{% if not app.user %}
 									<div class="dropdown-menu">
-										<form class="px-4 py-3">
+										<form class="px-4 py-3" action={{ path('security_login')}} method="post">
 											<div class="form-group">
 												<label>Addresse mail</label>
-												<input type="email" class="form-control" placeholder="email@example.com">
+												<input type="email" class="form-control" placeholder="entrez votre adresse mail" required name="_username">
 											</div>
 											<div class="form-group">
 												<label>Mot de passe</label>
-												<input type="password" class="form-control" placeholder="Password">
+												<input type="password" class="form-control" placeholder="Entrez votre mot de passe" required name="_password">
 											</div>
 											<button type="submit" class="btn btn-primary">Connexion</button>
 										</form>
 										<hr class="dropdown-divider">
-										<a class="dropdown-item" href="#">Créer un compte </a>
+										<a class="dropdown-item" href={{ path('security_register') }}>Créer un compte </a>
 										<a class="dropdown-item" href="#">Mot de passe oublié</a>
 									</div> <!--  dropdown-menu .// -->
+										{% else %}
+										<div class="dropdown-menu p-2 mt-4" style="width:350px">
+											<span style="color:gray"> Bonjour ! vous etes connectez en tant que <strong style="color:green">
+													{{ app.user.lastName }} {{ app.user.firstName }}
+												({{ app.user.email }})
+												</strong></span><br/>
+											<div class="mt-2">
+												<a  role="button" class="btn btn-secondary" href={{ path('security_logout') }}>Deconnexion</a>
+											</div>
+
+										</div>
+									{% endif %}
 								</div>  <!-- widget-header .// -->
 							</div> <!-- col.// -->
 							<div class="col-auto">
