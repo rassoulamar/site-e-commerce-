@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190808215911 extends AbstractMigration
+final class Version20190816184923 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,10 @@ final class Version20190808215911 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE categorie CHANGE parent_name_id parent_name_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE user CHANGE roles roles JSON NOT NULL');
+        $this->addSql('ALTER TABLE product DROP FOREIGN KEY FK_D34A04AD7975B7E7');
+        $this->addSql('DROP INDEX IDX_D34A04AD7975B7E7 ON product');
+        $this->addSql('ALTER TABLE product DROP model_id, CHANGE mark_id mark_id INT DEFAULT NULL, CHANGE categorie_id categorie_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE user CHANGE adress_id adress_id INT DEFAULT NULL, CHANGE roles roles JSON NOT NULL');
         $this->addSql('ALTER TABLE product_detail CHANGE product_id product_id INT DEFAULT NULL');
     }
 
@@ -32,8 +34,10 @@ final class Version20190808215911 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE categorie CHANGE parent_name_id parent_name_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE product ADD model_id INT DEFAULT NULL, CHANGE mark_id mark_id INT DEFAULT NULL, CHANGE categorie_id categorie_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04AD7975B7E7 FOREIGN KEY (model_id) REFERENCES model (id)');
+        $this->addSql('CREATE INDEX IDX_D34A04AD7975B7E7 ON product (model_id)');
         $this->addSql('ALTER TABLE product_detail CHANGE product_id product_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE user CHANGE roles roles LONGTEXT NOT NULL COLLATE utf8mb4_bin');
+        $this->addSql('ALTER TABLE user CHANGE adress_id adress_id INT DEFAULT NULL, CHANGE roles roles LONGTEXT NOT NULL COLLATE utf8mb4_bin');
     }
 }

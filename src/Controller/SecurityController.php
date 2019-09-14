@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Adresse;
 use App\Entity\User;
+use App\Form\AdresseType;
 use App\Form\LogonType;
 use App\Form\RegisterType;
 use App\Repository\CategorieRepository;

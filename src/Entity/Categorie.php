@@ -23,6 +23,27 @@ class Categorie
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="categorie",cascade={"remove"})
+     */
+    private $products;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="categories",cascade={"persist"})
+     */
+    private $parentCategorie ;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="parentCategorie")
+     */
+    private $categories;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -66,6 +87,49 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($product->getCategorie() === $this) {
                 $product->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getParentCategorie(): ?self
+    {
+        return $this->parentCategorie ;
+    }
+
+    public function setParentCategorie(?self $parentCategorie): self
+    {
+        $this->parentCategorie = $parentCategorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(self $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->setParentCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(self $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            // set the owning side to null (unless already changed)
+            if ($category->getParentCategorie() === $this) {
+                $category->setParentCategorie(null);
             }
         }
 

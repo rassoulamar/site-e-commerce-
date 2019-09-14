@@ -39,25 +39,20 @@ class Product
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $categorie;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProductDetail", mappedBy="product")
      */
     private $productDetails;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Mark", inversedBy="products")
-     */
-    private $mark;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Model", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="products",cascade={"persist"})
      */
-    private $model;
+    private $categorie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Brand", inversedBy="products")
+     */
+    private $marque;
 
     public function __construct()
     {
@@ -117,17 +112,6 @@ class Product
         return $this;
     }
 
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categorie $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
 
     /**
      * @return Collection|ProductDetail[]
@@ -160,27 +144,29 @@ class Product
         return $this;
     }
 
-    public function getMark(): ?Mark
+
+    public function getCategorie(): ?Categorie
     {
-        return $this->mark;
+        return $this->categorie;
     }
 
-    public function setMark(?Mark $mark): self
+    public function setCategorie(?Categorie $categorie): self
     {
-        $this->mark = $mark;
+        $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function getModel(): ?Model
+    public function getMarque(): ?Brand
     {
-        return $this->model;
+        return $this->marque;
     }
 
-    public function setModel(?Model $model): self
+    public function setMarque(?Brand $marque): self
     {
-        $this->model = $model;
+        $this->marque = $marque;
 
         return $this;
     }
+
 }

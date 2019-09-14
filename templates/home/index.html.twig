@@ -12,23 +12,24 @@
                         <h5 class="text-uppercase">Nos catégories</h5>
                         <ul class="menu-category">
                             {% for categorie in categories %}
-                                <li> <a href="{{ categorie.name }}"> {{ categorie.name }} </a></li>
+                                {% if categorie.parentCategorie == null %}
+                                <li> <a href="{{ categorie.name }}"> {{ categorie.name }} </a>
+                                </li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
-
-
                     </aside> <!-- col.// -->
                     <div class="col-md-6">
                         <!-- ================= main slide ================= -->
                         <div class="owl-init slider-main owl-carousel" data-items="1" data-nav="true" data-dots="false">
                             <div class="item-slide">
-                                <img src="images/banners/slide1.jpg">
+                                <img src="assets/img/macbook.jpg">
                             </div>
                             <div class="item-slide">
-                                <img src="images/banners/slide2.jpg">
+                                <img src="assets/img/ipad.jpg">
                             </div>
                             <div class="item-slide">
-                                <img src="images/banners/slide3.jpg">
+                                <img src="assets/img/airpods.jpg">
                             </div>
                         </div>
                         <!-- ============== main slidesow .end // ============= -->
@@ -39,25 +40,25 @@
                         <h6 class="title-bg bg-secondary"> Meilleurs séléctions</h6>
                         <div style="height:280px;">
                             <figure class="itemside has-bg border-bottom" style="height: 33%;">
-                                <img class="img-bg" src="images/items/item-sm.png">
+                                <img class="img-bg" src="images/items/4.png">
                                 <figcaption class="p-2">
-                                    <h6 class="title">One request, many offers </h6>
-                                    <a href="#">Good link</a>
+                                    <h6 class="title"> {{ products.0.name }} </h6>
+                                    <a href="#">{{products.0.price}}</a>
                                 </figcaption>
                             </figure>
 
                             <figure class="itemside has-bg border-bottom" style="height: 33%;">
-                                <img class="img-bg" src="images/items/1.jpg" height="80">
+                                <img class="img-bg" src="images/items/4.png" height="80">
                                 <figcaption class="p-2">
-                                    <h6 class="title">One request, many offers </h6>
-                                    <a href="#">Good link</a>
+                                    <h6 class="title">{{products.1.name}} </h6>
+                                    <a href="#">{{products.1.price}}</a>
                                 </figcaption>
                             </figure>
                             <figure class="itemside has-bg border-bottom" style="height: 33%;">
-                                <img class="img-bg" src="images/items/2.jpg" height="80">
+                                <img class="img-bg" src="images/items/4.png" height="80">
                                 <figcaption class="p-2">
-                                    <h6 class="title">One request, many offers </h6>
-                                    <a href="#">Good link</a>
+                                    <h6 class="title">{{products.2.name}} </h6>
+                                    <a href="#">{{products.2.name}}</a>
                                 </figcaption>
                             </figure>
                         </div>
@@ -77,7 +78,7 @@
         <div class="container">
 
             <header class="section-heading heading-line">
-                <h4 class="title-section bg">MACHINERY</h4>
+                <h4 class="title-section bg">{{categories.0.name}}</h4>
             </header>
 
             <div class="card">
@@ -86,11 +87,10 @@
 
                         <article href="#" class="card-banner h-100 bg2">
                             <div class="card-body zoom-wrap">
-                                <h5 class="title">Machinery items for manufacturers</h5>
-                                <p>Consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, c</p>
-                                <a href="#" class="btn btn-warning">Explore</a>
-                                <img src="images/items/item-sm.png" height="200" class="img-bg zoom-in">
+                                <h5 class="title">Achetez votre smartphone aux meilleurs prix </h5>
+                                <p> Lorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, c</p>
+                                <a href="#" class="btn btn-secondary">Explore la catégorie </a>
+                                <img src="images/items/4.png" height="200" class="img-bg zoom-in">
                             </div>
                         </article>
 
@@ -100,32 +100,32 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Home and kitchen electronic  stuff collection  </p>
-                                        <img class="img-sm" src="images/items/1.jpg">
+                                        <p class="word-limit">{{products.0.name}}  </p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Kitchen equipments collection</p>
-                                        <img class="img-sm" src="images/items/2.jpg">
+                                        <p class="word-limit">{{products.1.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Accessiries and other good items</p>
-                                        <img class="img-sm" src="images/items/3.jpg">
+                                        <p class="word-limit">{{products.2.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Techs, Electronics</p>
-                                        <img class="img-sm" src="images/items/4.jpg">
+                                        <p class="word-limit">{{products.3.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
@@ -134,32 +134,32 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Home and kitchen electronic stuff </p>
-                                        <img class="img-sm" src="images/items/1.jpg">
+                                        <p class="word-limit">{{products.4.name}} </p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Kitchen equipments collection</p>
-                                        <img class="img-sm" src="images/items/2.jpg">
+                                        <p class="word-limit">{{products.5.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Accessiries and other good items</p>
-                                        <img class="img-sm" src="images/items/3.jpg">
+                                        <p class="word-limit">{{products.6.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Techs, Electronics</p>
-                                        <img class="img-sm" src="images/items/4.jpg">
+                                        <p class="word-limit">{{products.7.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
@@ -178,7 +178,7 @@
         <div class="container">
 
             <header class="section-heading heading-line">
-                <h4 class="title-section bg text-uppercase">Food & Beverage</h4>
+                <h4 class="title-section bg text-uppercase">{{categories.1.name}}</h4>
             </header>
 
             <div class="card">
@@ -187,11 +187,11 @@
 
                         <article href="#" class="card-banner h-100 bg2">
                             <div class="card-body zoom-wrap">
-                                <h5 class="title">Good equipments for cooking food and cakes</h5>
+                                <h5 class="title">Trouvez une tablette pour vous et vous enfants </h5>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <a href="#" class="btn btn-warning">Explore</a>
-                                <img src="images/items/item-sm.png" height="200" class="img-bg zoom-in">
+                                <a href="#" class="btn btn-secondary">Explore la catégorie</a>
+                                <img src="images/items/4.png" height="200" class="img-bg zoom-in">
                             </div>
                         </article>
 
@@ -201,32 +201,32 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Home and kitchen electronic  stuff collection  </p>
-                                        <img class="img-sm" src="images/items/1.jpg">
+                                        <p class="word-limit">{{products.0.name}} </p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Kitchen equipments collection</p>
-                                        <img class="img-sm" src="images/items/2.jpg">
+                                        <p class="word-limit">{{products.1.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Accessiries and other good items</p>
-                                        <img class="img-sm" src="images/items/3.jpg">
+                                        <p class="word-limit">{{products.2.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Techs, Electronics</p>
-                                        <img class="img-sm" src="images/items/4.jpg">
+                                        <p class="word-limit">{{products.3.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
@@ -235,32 +235,32 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Home and kitchen electronic stuff </p>
-                                        <img class="img-sm" src="images/items/1.jpg">
+                                        <p class="word-limit">{{products.4.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Kitchen equipments collection</p>
-                                        <img class="img-sm" src="images/items/2.jpg">
+                                        <p class="word-limit">{{products.5.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Accessiries and other good items</p>
-                                        <img class="img-sm" src="images/items/3.jpg">
+                                        <p class="word-limit">{{products.6.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">Techs, Electronics</p>
-                                        <img class="img-sm" src="images/items/4.jpg">
+                                        <p class="word-limit">{{products.7.name}}</p>
+                                        <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
                             </li>
@@ -288,13 +288,13 @@
                 {% for product in products %}
                 <div class="col-md-3">
                     <figure class="card card-product">
-                        <div class="img-wrap"> <img src="images/items/4.jpg"></div>
+                        <div class="img-wrap"> <img src="images/items/4.png"></div>
                         <figcaption class="info-wrap">
                             <h6 class="title "><a href="#">{{product.name}} </a></h6>
                             <div class="price-wrap">
                                 <span class="price-new">Prix: {{product.price}}</span>
-                                <span class="price-old">Marque: {{product.mark.name}}</span>
-                                <span class="product-old">Model: {{product.model.name}}</span>
+                                <span class="price-old">Marque: {{product.name}}</span>
+                                <span class="product-old">Model: {{product.name}}</span>
                             </div> <!-- price-wrap.// -->
 
                         </figcaption>
@@ -315,19 +315,18 @@
     <section class="section-subscribe bg-secondary padding-y-lg">
         <div class="container">
 
-            <p class="pb-2 text-center white">Delivering the latest product trends and industry news straight to your inbox</p>
+            <p class="pb-2 text-center white">Abonnez vous aux news letters afin de recevoir tous nos nouveaux produits </p>
 
             <div class="row justify-content-md-center">
                 <div class="col-lg-4 col-sm-6">
                     <form class="row-sm form-noborder">
                         <div class="col-8">
-                            <input class="form-control" placeholder="Your Email" type="email">
+                            <input class="form-control" placeholder="Votre adresse Email" type="email">
                         </div> <!-- col.// -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Subscribe </button>
+                            <button type="submit" class="btn btn-block btn-dark"> <i class="fa fa-envelope"></i> Souscrire </button>
                         </div> <!-- col.// -->
                     </form>
-                    <small class="form-text text-white-50">We’ll never share your email address with a third-party. </small>
                 </div> <!-- col-md-6.// -->
             </div>
 

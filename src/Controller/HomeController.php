@@ -18,14 +18,12 @@ class HomeController extends AbstractController
 
         $categories =$categorieRepository->findAll();
         $products = $productRepository->findAll();
-        dump($products);
-        $nombre =count($products);
+
 
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
             'categories'=>$categories,
             'products'=>$products,
-            'nombre'=>$nombre,
+
         ]);
     }
 }

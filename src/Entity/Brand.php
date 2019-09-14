@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ModelRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\BrandRepository")
  */
-class Model
+class Brand
 {
     /**
      * @ORM\Id()
@@ -24,7 +24,7 @@ class Model
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="model")
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="marque")
      */
     private $products;
 
@@ -62,7 +62,7 @@ class Model
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->setModel($this);
+            $product->setMarque($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class Model
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
             // set the owning side to null (unless already changed)
-            if ($product->getModel() === $this) {
-                $product->setModel(null);
+            if ($product->getMarque() === $this) {
+                $product->setMarque(null);
             }
         }
 

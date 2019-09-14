@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -72,6 +74,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Adresse",cascade={"persist"})
+     */
+    private $adress;
 
 
     public function getId(): ?int
@@ -172,8 +179,18 @@ class User implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
         return $this;
     }
 
+    public function getAdress(): ?Adresse
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(?Adresse $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
 }

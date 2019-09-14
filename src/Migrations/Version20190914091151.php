@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190809122214 extends AbstractMigration
+final class Version20190914091151 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,10 @@ final class Version20190809122214 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE product CHANGE mark_id mark_id INT DEFAULT NULL, CHANGE model_id model_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE user CHANGE roles roles JSON NOT NULL');
+        $this->addSql('CREATE TABLE marque (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE categorie CHANGE parent_categorie_id parent_categorie_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE product CHANGE categorie_id categorie_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE user CHANGE adress_id adress_id INT DEFAULT NULL, CHANGE roles roles JSON NOT NULL');
         $this->addSql('ALTER TABLE product_detail CHANGE product_id product_id INT DEFAULT NULL');
     }
 
@@ -32,8 +34,10 @@ final class Version20190809122214 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE product CHANGE mark_id mark_id INT DEFAULT NULL, CHANGE model_id model_id INT DEFAULT NULL');
+        $this->addSql('DROP TABLE marque');
+        $this->addSql('ALTER TABLE categorie CHANGE parent_categorie_id parent_categorie_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE product CHANGE categorie_id categorie_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE product_detail CHANGE product_id product_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE user CHANGE roles roles LONGTEXT NOT NULL COLLATE utf8mb4_bin');
+        $this->addSql('ALTER TABLE user CHANGE adress_id adress_id INT DEFAULT NULL, CHANGE roles roles LONGTEXT NOT NULL COLLATE utf8mb4_bin');
     }
 }
