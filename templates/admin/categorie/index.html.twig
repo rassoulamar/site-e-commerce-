@@ -13,7 +13,6 @@
         <tr>
             <th>identifiant</th>
             <th>nom de la catégorie</th>
-            <th>Categorie parente</th>
         </tr>
         </thead>
         <tbody>
@@ -23,9 +22,6 @@
                 <tr>
                 <td>{{ categorie.id }}</td>
                 <td>{{ categorie.name }}</td>
-                {% if categorie.parentCategorie %}
-                    <td> {{categorie.parentCategorie.name}}</td>
-                    {% endif %}
             </tr>
 
         {% else %}

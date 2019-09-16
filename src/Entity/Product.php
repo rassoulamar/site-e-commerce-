@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -24,14 +25,32 @@ class Product
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
+
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $image;
 
     /**
      * @ORM\Column(type="float")
@@ -54,9 +73,21 @@ class Product
      */
     private $marque;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PanierProduct", mappedBy="product")
+     */
+    private $panierProducts;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     */
+    private $image;
+
+
     public function __construct()
     {
         $this->productDetails = new ArrayCollection();
+        $this->panierProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,18 +115,6 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }
@@ -169,4 +188,46 @@ class Product
         return $this;
     }
 
+    /**
+     * @return Collection|PanierProduct[]
+     */
+    public function getPanierProducts(): Collection
+    {
+        return $this->panierProducts;
+    }
+
+    public function addPanierProduct(PanierProduct $panierProduct): self
+    {
+        if (!$this->panierProducts->contains($panierProduct)) {
+            $this->panierProducts[] = $panierProduct;
+            $panierProduct->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanierProduct(PanierProduct $panierProduct): self
+    {
+        if ($this->panierProducts->contains($panierProduct)) {
+            $this->panierProducts->removeElement($panierProduct);
+            // set the owning side to null (unless already changed)
+            if ($panierProduct->getProduct() === $this) {
+                $panierProduct->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 }

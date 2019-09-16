@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
@@ -24,24 +25,19 @@ class Categorie
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="categorie",cascade={"remove"})
      */
     private $products;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="categories",cascade={"persist"})
-     */
-    private $parentCategorie ;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="parentCategorie")
-     */
-    private $categories;
-
     public function __construct()
     {
         $this->products = new ArrayCollection();
-        $this->categories = new ArrayCollection();
     }
 
 
@@ -59,6 +55,15 @@ class Categorie
     {
         $this->name = $name;
 
+        return $this;
+    }
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
         return $this;
     }
 
@@ -87,49 +92,6 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($product->getCategorie() === $this) {
                 $product->setCategorie(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getParentCategorie(): ?self
-    {
-        return $this->parentCategorie ;
-    }
-
-    public function setParentCategorie(?self $parentCategorie): self
-    {
-        $this->parentCategorie = $parentCategorie;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|self[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(self $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->setParentCategorie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(self $category): self
-    {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-            // set the owning side to null (unless already changed)
-            if ($category->getParentCategorie() === $this) {
-                $category->setParentCategorie(null);
             }
         }
 

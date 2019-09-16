@@ -14,15 +14,6 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('parentCategorie',EntityType::class,[
-                'class'=>Categorie::class,
-                'choice_label' => 'name',
-                'placeholder' => 'Choose an option',
-                'required'   => false,
-                'empty_data' => null,
-
-
-            ])
         ;
     }
 

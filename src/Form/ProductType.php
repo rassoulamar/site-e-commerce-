@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Brand;
 use App\Entity\Categorie;
+use App\Entity\Image;
 use App\Entity\Mark;
 use App\Entity\Model;
 use App\Entity\Product;
@@ -24,7 +25,10 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('image')
+            ->add('image',EntityType::class,[
+                'class'=>Image::class,
+                'choice_label'=>'path',
+            ])
             ->add('price')
             ->add('marque',EntityType::class,[
                 'class'=>Brand::class,

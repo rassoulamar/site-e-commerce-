@@ -12,10 +12,8 @@
                         <h5 class="text-uppercase">Nos catégories</h5>
                         <ul class="menu-category">
                             {% for categorie in categories %}
-                                {% if categorie.parentCategorie == null %}
                                 <li> <a href="{{ categorie.name }}"> {{ categorie.name }} </a>
                                 </li>
-                                {% endif %}
                             {% endfor %}
                         </ul>
                     </aside> <!-- col.// -->
