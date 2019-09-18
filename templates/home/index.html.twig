@@ -12,7 +12,7 @@
                         <h5 class="text-uppercase">Nos catégories</h5>
                         <ul class="menu-category">
                             {% for categorie in categories %}
-                                <li> <a href="{{ categorie.name }}"> {{ categorie.name }} </a>
+                                <li> <a href="{{ categorie.slug }}"> {{ categorie.name }} </a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -30,7 +30,7 @@
                                 <img src="assets/img/airpods.jpg">
                             </div>
                         </div>
-                        <!-- ============== main slidesow .end // ============= -->
+                        <!-- ============== main slideshow .end // ============= -->
 
                     </div> <!-- col.// -->
                     <aside class="col-md-3">
@@ -274,7 +274,7 @@
 
 
 
-    <!-- ========================= SECTION ITEMS ========================= -->
+    <!-- ========================= Les plus vendues  ========================= -->
     <section class="section-request bg padding-y-sm">
         <div class="container">
             <header class="section-heading heading-line">

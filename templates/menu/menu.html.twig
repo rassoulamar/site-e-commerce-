@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    {% block title %}produit par categorie {% endblock %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="card m-4 p-4">
+                </tbody>
+            </table>
+        <section class="section-request bg padding-y-sm">
+            <div class="container">
+                <header class="section-heading heading-line">
+                    <h4 class="title-section bg text-uppercase">
+                        {% for categorie in category %}
+                           {{categorie.name}}
+                        {% endfor %}
+                    </h4>
+                </header>
+
+                <div class="row-sm">
+
+                    {% for product in products %}
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <div class="img-wrap"> <img src="images/items/4.png"></div>
+                                <figcaption class="info-wrap">
+                                    <h6 class="title "><a href="#">{{product.name}} </a></h6>
+                                    <div class="price-wrap">
+                                        <span class="price-new">Prix: {{product.price}}</span></br>
+                                        <span class="price-old">Marque: {{product.name}}</span></br>
+                                        <span class="product-old">Model: {{product.name}}</span></br>
+                                    </div> <!-- price-wrap.// -->
+
+                                </figcaption>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+
+                    {% else %}
+                    <tr>
+                        <td colspan="3">Aucune produit à afficher</td>
+                    </tr>
+                    {% endfor %}
+
+                </div> <!--//row-->
+
+
+            </div><!-- container // -->
+        </section>
+        </div>
+        </div>
+{% endblock %}

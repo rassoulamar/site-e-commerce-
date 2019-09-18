@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/admin/user")
  */
-class UserController extends AbstractController
+class AdminUserController extends AbstractController
 {
     /**
      * @Route("/", name="user_index", methods={"GET"})
