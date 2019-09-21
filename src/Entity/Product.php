@@ -58,13 +58,6 @@ class Product
      * @ORM\Column(type="float")
      */
     private $price;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductDetail", mappedBy="product")
-     */
-    private $productDetails;
-
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="products",cascade={"persist"})
      */
@@ -85,11 +78,18 @@ class Product
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $color;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $size;
 
     public function __construct()
     {
-        $this->productDetails = new ArrayCollection();
         $this->panierProducts = new ArrayCollection();
     }
 
@@ -133,39 +133,6 @@ class Product
 
         return $this;
     }
-
-
-    /**
-     * @return Collection|ProductDetail[]
-     */
-    public function getProductDetails(): Collection
-    {
-        return $this->productDetails;
-    }
-
-    public function addProductDetail(ProductDetail $productDetail): self
-    {
-        if (!$this->productDetails->contains($productDetail)) {
-            $this->productDetails[] = $productDetail;
-            $productDetail->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProductDetail(ProductDetail $productDetail): self
-    {
-        if ($this->productDetails->contains($productDetail)) {
-            $this->productDetails->removeElement($productDetail);
-            // set the owning side to null (unless already changed)
-            if ($productDetail->getProduct() === $this) {
-                $productDetail->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
 
     public function getCategorie(): ?Categorie
     {
@@ -230,6 +197,30 @@ class Product
     public function setImage(?Image $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getSize(): ?string
+    {
+        return $this->size;
+    }
+
+    public function setSize(string $size): self
+    {
+        $this->size = $size;
 
         return $this;
     }

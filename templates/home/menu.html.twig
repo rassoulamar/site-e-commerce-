@@ -1,13 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block head %}
-    {% block title %}produit par categorie {% endblock %}
+    {% block title %}produits par catégorie {% endblock %}
 {% endblock %}
-
 {% block body %}
     <div class="container">
     <div class="card m-4 p-4">
-                </tbody>
-            </table>
         <section class="section-request bg padding-y-sm">
             <div class="container">
                 <header class="section-heading heading-line">
@@ -21,11 +18,12 @@
                 <div class="row-sm">
 
                     {% for product in products %}
+                        {% for categorie in category %}
                         <div class="col-md-3">
                             <figure class="card card-product">
-                                <div class="img-wrap"> <img src="images/items/4.png"></div>
+                                <div class="img-wrap"> <img src="/images/items/4.png"></div>
                                 <figcaption class="info-wrap">
-                                    <h6 class="title "><a href="#">{{product.name}} </a></h6>
+                                    <h6 class="title "><a href="/menu/{{ categorie.slug }}/{{product.slug}}">{{product.name}} </a></h6>
                                     <div class="price-wrap">
                                         <span class="price-new">Prix: {{product.price}}</span></br>
                                         <span class="price-old">Marque: {{product.name}}</span></br>
@@ -41,10 +39,9 @@
                         <td colspan="3">Aucune produit à afficher</td>
                     </tr>
                     {% endfor %}
+                    {% endfor %}
 
                 </div> <!--//row-->
-
-
             </div><!-- container // -->
         </section>
         </div>

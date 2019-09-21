@@ -12,7 +12,7 @@
                         <h5 class="text-uppercase">Nos catégories</h5>
                         <ul class="menu-category">
                             {% for categorie in categories %}
-                                <li> <a href="{{ categorie.slug }}"> {{ categorie.name }} </a>
+                                <li> <a href="/menu/{{ categorie.slug }}"> {{ categorie.name }} </a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -286,15 +286,14 @@
                 {% for product in products %}
                 <div class="col-md-3">
                     <figure class="card card-product">
-                        <div class="img-wrap"> <img src="images/items/4.png"></div>
+                        <div class="img-wrap"> <img src="/images/items/4.png"></div>
                         <figcaption class="info-wrap">
                             <h6 class="title "><a href="#">{{product.name}} </a></h6>
                             <div class="price-wrap">
-                                <span class="price-new">Prix: {{product.price}}</span>
-                                <span class="price-old">Marque: {{product.name}}</span>
-                                <span class="product-old">Model: {{product.name}}</span>
+                                <span class="price-new">Prix: {{product.price}}</span></br>
+                                <span class="price-old">Marque: {{product.marque.name}}</span></br>
+                                <span> <button id="add-to-cart">Add to cart</button></span>
                             </div> <!-- price-wrap.// -->
-
                         </figcaption>
                     </figure> <!-- card // -->
                 </div> <!-- col // -->

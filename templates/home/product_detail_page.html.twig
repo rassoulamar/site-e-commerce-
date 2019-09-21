@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    {% block title %}
+        {% for product in products %}
+            {{ product.name }}
+        {% endfor %}
+    {% endblock %}
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="card p-4 m-4">
+        <header class="section-heading heading-line">
+            <h4 class="title-section bg text-uppercase">
+                {% for product in products %}
+                    {{ product.name }}
+
+            </h4>
+        </header>
+        <div class="row">
+            <div class="col-6">
+        <div class="img-wrap"> <img src="/images/products/{{product.image.path}}"></div>
+            </div>
+            <div class="col-6">
+        <div> {{ product.description }}</div>
+        <div>{{ product.price }}</div>
+        <div>{{ product.marque.name }}</div>
+        <div>{{ product.color }}</div>
+        <div>{{ product.size }}</div>
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
