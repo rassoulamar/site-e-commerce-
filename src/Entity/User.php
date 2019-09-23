@@ -81,13 +81,13 @@ class User implements UserInterface
     private $adress;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Panier", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Entity\Panier", mappedBy="user")
      */
-    private $paniers;
+    private $panier;
 
     public function __construct()
     {
-        $this->paniers = new ArrayCollection();
+        $this->panier = new Panier();
     }
 
 
@@ -205,33 +205,19 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Panier[]
+     * @return mixed
      */
-    public function getPaniers(): Collection
+    public function getPanier()
     {
-        return $this->paniers;
+        return $this->panier;
     }
 
-    public function addPanier(Panier $panier): self
+    /**
+     * @param $panier
+     */
+    public function setPanier($panier)
     {
-        if (!$this->paniers->contains($panier)) {
-            $this->paniers[] = $panier;
-            $panier->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removePanier(Panier $panier): self
-    {
-        if ($this->paniers->contains($panier)) {
-            $this->paniers->removeElement($panier);
-            // set the owning side to null (unless already changed)
-            if ($panier->getUser() === $this) {
-                $panier->setUser(null);
-            }
-        }
-
+        $this->panier = $panier;
         return $this;
     }
 }

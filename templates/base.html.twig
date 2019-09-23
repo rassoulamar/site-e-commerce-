@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
+
     <head>
-        <meta charset="UTF-8">
+			<meta charset="UTF-8">
         <title>{% block title %}Bienvenue chez O Yes Télécom!{% endblock %}</title>
 
         <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Bootstrap-ecommerce by Vosidiy">
 
-<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.jpg">
 
 <!-- jQuery -->
 <script src="/js/jquery-2.0.0.min.js" type="text/javascript"></script>
 
 <!-- Bootstrap4 files-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 <!-- Font awesome 5 -->
 <link href="/fonts/fontawesome/css/fontawesome-all.min.css" type="text/css" rel="stylesheet">
 
@@ -30,22 +28,15 @@
 <!-- custom style -->
 <link href="/css/ui.css" rel="stylesheet" type="text/css"/>
 <link href="/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.js"></script>
 
-<!-- custom javascript -->
+		<!-- custom javascript -->
 <script src="/js/script.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-/// some script
-
-$(document).ready(function() {
-	// jQuery code
-});
-// jquery end
-</script>
-
+<script src="/js/notify.js" type="text/javascript"></script>
 
         {% block stylesheets %}{% endblock %}
-    </head>
+
+	</head>
 
 
 	<body>
@@ -78,12 +69,8 @@ $(document).ready(function() {
 							<button type="button" class="btn btn-light  dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-bars"></i> Categories</button>
 							<div class="dropdown-menu">
 								<div class="navbar-nav mr-auto">
-									{% for categorie in categories %}
-										<a class="dropdown-item" href="menu/{{ categorie.slug }}"> {{ categorie.name }} </a>
-									{% endfor %}
+									{{ render(controller('App\\Controller\\HomeAndMenuController::getAllCategories')) }}
 								</div>
-
-
 							</div>
 						</div>
 					</div>
@@ -155,7 +142,7 @@ $(document).ready(function() {
 								</div>  <!-- widget-header .// -->
 							</div> <!-- col.// -->
 							<div class="col-auto">
-								<a href="#" class="widget-header">
+								<a href="{{ path('panier') }}" class="widget-header">
 									<div class="icontext">
 										<div class="icon-wrap"><i class="text-secondary icon-sm fa fa-shopping-cart"></i></div>
 										<div class="text-wrap text-dark">

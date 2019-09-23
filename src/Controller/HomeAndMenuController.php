@@ -27,6 +27,18 @@ class HomeAndMenuController extends AbstractController
         ]);
     }
 
+    /**
+     * @param CategorieRepository $categorieRepository
+     * @return Response
+     */
+    public function getAllCategories(CategorieRepository $categorieRepository)
+    {
+        $categories =$categorieRepository->findAll();
+        return $this->render('home/categories.html.twig', [
+            'categories'=>$categories,
+        ]);
+    }
+
 
 }
 

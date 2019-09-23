@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}{% endblock %}
 {% block body %}
 <!-- ========================= SECTION MAIN ========================= -->
@@ -12,7 +11,7 @@
                         <h5 class="text-uppercase">Nos catégories</h5>
                         <ul class="menu-category">
                             {% for categorie in categories %}
-                                <li> <a href="/menu/{{ categorie.slug }}"> {{ categorie.name }} </a>
+                                <li> <a href="/{{ categorie.slug }}"> {{ categorie.name }} </a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -292,7 +291,14 @@
                             <div class="price-wrap">
                                 <span class="price-new">Prix: {{product.price}}</span></br>
                                 <span class="price-old">Marque: {{product.marque.name}}</span></br>
-                                <span> <button id="add-to-cart">Add to cart</button></span>
+                                <span>
+                                    <a href="#" class="btn btn-secondary add-to-cart" id = "{{ product.id }}"
+                                       data-name="{{ product.name }}" data-price="{{ product.price }}"
+                                       data-image="{{ product.image ? product.image.path : '#' }}"
+                                    >
+                                        Ajouter au Panier
+                                    </a>
+                                </span>
                             </div> <!-- price-wrap.// -->
                         </figcaption>
                     </figure> <!-- card // -->
@@ -331,4 +337,30 @@
         </div> <!-- container // -->
     </section>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('.add-to-cart').on("click", function(event) {
+            event.preventDefault();
+            $.ajax({
+                url:"{{ path('add-product')}}",
+                data:{
+                    'produitId': $(this).attr('id'),
+                    'quantite': 1,
+                    'name': $(this).data('name'),
+                    'price': $(this).data('price'),
+                    'image': $(this).data('image'),
+                },
+                success:function() {
+                    $.notify("Article ajouté au panier", "success");
+                },
+                error:function() {
+                    $.notify("Erreur !");
+                }
+            });
+        });
+    </script>
 {% endblock %}

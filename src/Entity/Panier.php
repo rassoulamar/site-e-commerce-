@@ -24,7 +24,7 @@ class Panier
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="paniers")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="panier")
      */
     private $user;
 
