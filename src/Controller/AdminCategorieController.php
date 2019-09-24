@@ -49,7 +49,7 @@ class AdminCategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="categorie_show", methods={"GET"})
+     * @Route("/admin/categorie/{id}", name="categorie_show", methods={"GET"})
      */
     public function show(Categorie $categorie): Response
     {
@@ -59,7 +59,7 @@ class AdminCategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="categorie_edit", methods={"GET","POST"})
+     * @Route("admin/categorie/{id}/edit", name="categorie_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Categorie $categorie): Response
     {
@@ -79,13 +79,11 @@ class AdminCategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="categorie_delete", methods={"DELETE"})
+     * @Route("/admin/categorie/{id}", name="categorie_delete", methods={"DELETE"})
      */
-    public function delete($id,Request $request, Categorie $categorie): Response
+    public function delete(Request $request, Categorie $categorie): Response
     {
-        $categorietoken = $request->request->get('_token');
-        $tokenid = 'delete'.$categorie->getId();
-        if ($this->isCsrfTokenValid($tokenid,$categorietoken )) {
+        if ($this->isCsrfTokenValid('categorie_delete', $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($categorie);
             $entityManager->flush();

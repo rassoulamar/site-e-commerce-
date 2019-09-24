@@ -87,7 +87,6 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->panier = new Panier();
     }
 
 
@@ -214,8 +213,9 @@ class User implements UserInterface
 
     /**
      * @param $panier
+     * @return $this
      */
-    public function setPanier($panier)
+    public function setPanier($panier = null)
     {
         $this->panier = $panier;
         return $this;
