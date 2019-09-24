@@ -81,10 +81,11 @@ class AdminCategorieController extends AbstractController
     /**
      * @Route("/{id}", name="categorie_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Categorie $categorie): Response
+    public function delete($id,Request $request, Categorie $categorie): Response
     {
         $categorietoken = $request->request->get('_token');
-        if ($this->isCsrfTokenValid('delete_categorie',$categorietoken )) {
+        $tokenid = 'delete'.$categorie->getId();
+        if ($this->isCsrfTokenValid($tokenid,$categorietoken )) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($categorie);
             $entityManager->flush();
