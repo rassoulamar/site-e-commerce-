@@ -83,8 +83,8 @@ class AdminImageController extends AbstractController
      */
     public function delete(Request $request, Image $image): Response
     {
-            $idimage = $image->getId() ;
-        if ($this->isCsrfTokenValid('delete'.$idimage, $request->request->get('_token'))) {
+        $submitedtoken= $request->request->get('_token');
+        if ($this->isCsrfTokenValid('delete',$submitedtoken )) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($image);
             $entityManager->flush();
