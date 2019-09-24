@@ -20,7 +20,7 @@ class Image
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 )
      */
     private $path;
 
@@ -52,7 +52,7 @@ class Image
         return $this->path;
     }
 
-    public function setPath(string $path): self
+    public function setPath(?string $path): self
     {
         $this->path = $path;
 
@@ -64,6 +64,22 @@ class Image
         return $this->alt;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
     public function setAlt(string $alt): self
     {
         $this->alt = $alt;
@@ -72,7 +88,7 @@ class Image
     }
 
 
-    public function setImageFile(File $path = null)
+    public function setImageFile(File $path=null )
     {
         $this->imageFile = $path;
 

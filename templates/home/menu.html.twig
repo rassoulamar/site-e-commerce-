@@ -23,11 +23,18 @@
                             <figure class="card card-product">
                                 <div class="img-wrap"> <img src="/images/items/4.png"></div>
                                 <figcaption class="info-wrap">
-                                    <h6 class="title "><a href="/{{ categorie.slug }}/{{product.slug}}">{{product.name}} </a></h6>
+                                    <h6 class="title "><a href="/menu/{{ categorie.slug }}/{{product.slug}}">{{product.name}} </a></h6>
                                     <div class="price-wrap">
                                         <span class="price-new">Prix: {{product.price}}</span></br>
                                         <span class="price-old">Marque: {{product.name}}</span></br>
-                                        <span class="product-old">Model: {{product.name}}</span></br>
+                                        <span>
+                                    <a href="#" class="btn btn-secondary add-to-cart" id="{{ product.id }}"
+                                       data-name="{{ product.name }}" data-price="{{ product.price }}"
+                                       data-image="{{ product.image ? product.image.path : '#' }}"
+                                    >
+                                        Ajouter au Panier
+                                    </a>
+                                </span></br>
                                     </div> <!-- price-wrap.// -->
 
                                 </figcaption>
@@ -46,4 +53,29 @@
         </section>
         </div>
         </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('.add-to-cart').on("click", function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "{{ path('add-product') }}",
+                data: {
+                    'produitId': $(this).attr('id'),
+                    'quantite': 1,
+                    'name': $(this).data('name'),
+                    'price': $(this).data('price'),
+                    'image': $(this).data('image'),
+                },
+                success: function () {
+                    $.notify("Article ajouté au panier", "success");
+                },
+                error: function () {
+                    $.notify("Erreur !");
+                }
+            });
+        });
+    </script>
 {% endblock %}

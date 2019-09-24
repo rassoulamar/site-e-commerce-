@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/image")
+ * @Route("/admin/image")
  */
 class AdminImageController extends AbstractController
 {
@@ -79,11 +79,12 @@ class AdminImageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="image_delete", methods={"DELETE"})
+     * @Route("/admin/image/{id}", name="image_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Image $image): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->request->get('_token'))) {
+            $idimage = $image->getId() ;
+        if ($this->isCsrfTokenValid('delete'.$idimage, $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($image);
             $entityManager->flush();

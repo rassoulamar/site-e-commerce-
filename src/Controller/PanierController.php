@@ -33,9 +33,11 @@ class PanierController extends AbstractController
 
     /**
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
-     *
-     * @Route("/panier/ajout-produit", name="add-product")
+     * @throws \Exception
+     *      * @Route("/panier/ajout-produit", name="add-product")
+
      */
     public function addToPanier(Request $request, EntityManagerInterface $entityManager)
     {
@@ -66,8 +68,10 @@ class PanierController extends AbstractController
         $panier = $user->getPanier();
         if(!$panier) {
             $panier = new Panier();
-            $user->setPanier($panier);
+            $panier->setUser($user)->setCreatedAt(new \DateTime('now'));
         }
+        $entityManager->persist($panier);
+        $entityManager->flush();
 
         $productRepository = $entityManager->getRepository(Product::class);
         $product = $productRepository->find($produitId);
@@ -83,5 +87,9 @@ class PanierController extends AbstractController
         $entityManager->flush();
 
         return new Response();
+    }
+
+    public function validerLePanier() {
+
     }
 }

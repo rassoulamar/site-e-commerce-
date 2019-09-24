@@ -13,6 +13,7 @@
         <tr>
             <th>identifiant</th>
             <th>nom de la catégorie</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +23,10 @@
                 <tr>
                 <td>{{ categorie.id }}</td>
                 <td>{{ categorie.name }}</td>
+                    <td>
+                        <a href="{{ path('categorie_show', {'id': categorie.id}) }}">show</a>
+                        <a href="{{ path('categorie_edit', {'id': categorie.id}) }}">edit</a>
+                    </td>
             </tr>
 
         {% else %}

@@ -28,6 +28,8 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('image',ImageType::class)
             ->add('price')
+            ->add('color')
+            ->add('size')
             ->add('marque',EntityType::class,[
                 'class'=>Brand::class,
                 'choice_label' => 'name',

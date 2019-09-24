@@ -35,7 +35,7 @@ class FrontMenuController extends AbstractController
     }
 
     /**
-     * @Route("/menu/{categorie_slug}/{product_slug}", name="category_product_slug")
+     * @Route("/menu/{categorie_slug}/{product_slug}", name="menu_prdoduit_detail")
      * @param $product_slug
      * @param ProductRepository $productRepository
      * @param CategorieRepository $categorieRepository
