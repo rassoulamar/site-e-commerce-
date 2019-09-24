@@ -48,7 +48,6 @@ class FrontMenuController extends AbstractController
         $categories = $categorieRepository->findAll();
         $category = $categorieRepository->findby(['slug' => $categorie_slug]);
         $products = $productRepository->findby(['slug' => $product_slug]);
-        dump($products);
         if (!$products) {
             throw $this->createNotFoundException('The product does not exist');}
 
