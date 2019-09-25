@@ -3,7 +3,21 @@
 {% block title %}Hello PanierController!{% endblock %}
 
 {% block body %}
-    <table>
+    {% if not (app.user)  %}
+<section class="section-main bg padding-y-sm">
+    <div class="container">
+        <div class="card">
+
+            <h3 class="center"> Votre panier est vide, ajouter des produits à votre panier !</h3>
+            <img  class="center" src="/images/logos/panier.png"  width="300">
+    </div>
+    </div>
+</section>
+    {% else %}
+<section class="section-main bg padding-y-sm">
+    <div class="container">
+        <div class="card">
+    <table class="table">
         <tr>
             <th>Image</th>
             <th>Nom</th>
@@ -15,7 +29,7 @@
             {% set total = 0 %}
             {% for produit in panier %}
                 <tr>
-                    <td>{{ produit.image }}</td>
+                    <td class="w-25"><img src="/images/products/{{ produit.image }}" class=" img-thumbnail"></td>
                     <td>{{ produit.name }}</td>
                     <td>{{ produit.quantite }}</td>
                     <td>{{ produit.price }}</td>
@@ -32,4 +46,9 @@
             </tr>
         </tbody>
     </table>
-{% endblock %}
+    </div>
+    </div>
+</section>
+        {% endif %}
+
+        {% endblock %}

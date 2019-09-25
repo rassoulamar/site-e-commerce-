@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PanierController extends AbstractController
+class FrontPanierController extends AbstractController
 {
     /**
      * @Route("/panier", name="panier")
