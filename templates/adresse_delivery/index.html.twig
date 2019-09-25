@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} choisir l'adresse et la livraison {% endblock %}
+
+{% block body %}
+    <section class="section-main bg padding-y-sm">
+    <div class="container">
+        <div class="card-body">
+            <h3> choississez votre adresse ou modifiez la : </h3>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="adresseRadio" name="adresseRadio" class="custom-control-input">
+                <label class="custom-control-label" for="adresseRadio">  {{ adress.street }} , {{ adress.zipcode }}  {{ adress.city }}   {{ adress.country }}</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="adresseRadioChanger" name="adresseRadio" class="custom-control-input">
+                <label class="custom-control-label" for="adresseRadioChanger"> Entrez votre nouvelle adresse </label>
+            </div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+    </section>
+
+{% endblock %}
