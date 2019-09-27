@@ -72,11 +72,12 @@
 
 
     <!-- ========================= SECTION CONTENT ========================= -->
+    {% for categorie in categories %}
     <section class="section-content padding-y-sm bg">
         <div class="container">
 
             <header class="section-heading heading-line">
-                <h4 class="title-section bg">{{ categories.0.name }}</h4>
+                <h4 class="title-section bg">{{ categorie.name }}</h4>
             </header>
             <div class="card">
                 <div class="row no-gutters">
@@ -103,7 +104,7 @@
                                         <a href="#" class="itembox">
                                             <div class="card-body">
                                                 <p class="word-limit">{{ product.name }}  </p>
-                                                <img class="img-sm" src="images/items/4.png">
+                                                <img class="img-sm" src="/images/products/{{product.image.path}}">
                                             </div>
                                         </a>
                                         <span>
@@ -127,7 +128,7 @@
                                                 <a href="#" class="itembox">
                                                     <div class="card-body">
                                                         <p class="word-limit">{{ product.name }}  </p>
-                                                        <img class="img-sm" src="images/items/4.png">
+                                                        <img class="img-sm" src="/images/products/{{product.image.path}}">
                                                     </div>
                                                 </a>
                                                 <span>
@@ -151,14 +152,15 @@
 
         </div> <!-- container .//  -->
     </section>
+    {% endfor %}
     <!-- ========================= SECTION CONTENT END// ========================= -->
 
     <!-- ========================= SECTION CONTENT ========================= -->
-    <section class="section-content padding-y-sm bg">
+  {#  <section class="section-content padding-y-sm bg">
         <div class="container">
 
             <header class="section-heading heading-line">
-                <h4 class="title-section bg text-uppercase">{{ categories.0.name }}</h4>
+                <h4 class="title-section bg text-uppercase">{{ categories.1.name }}</h4>
             </header>
 
             <div class="card">
@@ -252,7 +254,12 @@
 
         </div> <!-- container .//  -->
     </section>
-    <!-- ========================= SECTION CONTENT END// ========================= -->
+    <!-- ========================= SECTION CONTENT END// ========================= -->#}
+
+
+
+
+
 
 
 
@@ -268,7 +275,7 @@
                 {% for product in products %}
                     <div class="col-md-3">
                         <figure class="card card-product">
-                            <div class="img-wrap"><img src="/images/items/4.png"></div>
+                            <div class="img-wrap"><img src="/images/products/{{product.image.path}}"></div>
                             <figcaption class="info-wrap">
                                 <h6 class="title "><a href="#">{{ product.name }} </a></h6>
                                 <div class="price-wrap">
