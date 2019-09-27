@@ -18,6 +18,13 @@ class PanierProduct
      */
     private $id;
 
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="panierProducts")
+     */
+    private $product;
+
     /**
      * @ORM\Column(type="integer")
      */
@@ -27,11 +34,6 @@ class PanierProduct
      * @ORM\ManyToOne(targetEntity="App\Entity\Panier", inversedBy="panierProducts")
      */
     private $panier;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="panierProducts")
-     */
-    private $product;
 
 
     public function getId(): ?int

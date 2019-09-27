@@ -75,15 +75,22 @@ class User implements UserInterface
      */
     private $lastName;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Adresse",cascade={"persist"})
-     */
-    private $adress;
+
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Panier", mappedBy="user")
      */
     private $panier;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\AdressBilling", cascade={"persist", "remove"})
+     */
+    private $adressBilling;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\AdressDelivery", cascade={"persist", "remove"})
+     */
+    private $adressDelivery;
 
     public function __construct()
     {
@@ -191,18 +198,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAdress(): ?Adresse
-    {
-        return $this->adress;
-    }
-
-    public function setAdress(?Adresse $adress): self
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
     /**
      * @return mixed
      */
@@ -218,6 +213,30 @@ class User implements UserInterface
     public function setPanier($panier = null)
     {
         $this->panier = $panier;
+        return $this;
+    }
+
+    public function getAdressBilling(): ?AdressBilling
+    {
+        return $this->adressBilling;
+    }
+
+    public function setAdressBilling(?AdressBilling $adressBilling): self
+    {
+        $this->adressBilling = $adressBilling;
+
+        return $this;
+    }
+
+    public function getAdressDelivery(): ?AdressDelivery
+    {
+        return $this->adressDelivery;
+    }
+
+    public function setAdressDelivery(?AdressDelivery $adressDelivery): self
+    {
+        $this->adressDelivery = $adressDelivery;
+
         return $this;
     }
 }

@@ -23,7 +23,7 @@ class UserType extends AbstractType
             ->add('lastName')
             ->add('roles', CollectionType::class)
             ->add('password', PasswordType::class)
-            ->add('adress', AdresseType::class);
+            ->add('adressDelivery', AdressDeliveryType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

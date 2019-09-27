@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\AdressDelivery;
 use App\Entity\User;
+use App\Entity\Ville;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -19,7 +21,9 @@ class RegisterType extends AbstractType
             ->add('email')
             ->add('password',PasswordType::class)
             ->add('confirm_password',PasswordType::class)
-            ->add('adress',AdresseType::class)
+            ->add('adressDelivery',AdressDeliveryType::class)
+            ->add('adressBilling',AdressBillingType::class,[
+                'disabled'=>true            ])
         ;
     }
 
