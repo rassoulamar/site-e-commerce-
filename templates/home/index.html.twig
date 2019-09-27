@@ -48,15 +48,15 @@
                                 <figure class="itemside has-bg border-bottom" style="height: 33%;">
                                     <img class="img-bg" src="images/items/4.png" height="80">
                                     <figcaption class="p-2">
-                                        <h6 class="title">{{ products.1.name }} </h6>
-                                        <a href="#">{{ products.1.price }}</a>
+                                        <h6 class="title">{{ products.0.name }} </h6>
+                                        <a href="#">{{ products.0.price }}</a>
                                     </figcaption>
                                 </figure>
                                 <figure class="itemside has-bg border-bottom" style="height: 33%;">
                                     <img class="img-bg" src="images/items/4.png" height="80">
                                     <figcaption class="p-2">
-                                        <h6 class="title">{{ products.2.name }} </h6>
-                                        <a href="#">{{ products.2.name }}</a>
+                                        <h6 class="title">{{ products.0.name }} </h6>
+                                        <a href="#">{{ products.0.name }}</a>
                                     </figcaption>
                                 </figure>
                             </div>
@@ -158,7 +158,7 @@
         <div class="container">
 
             <header class="section-heading heading-line">
-                <h4 class="title-section bg text-uppercase">{{ categories.1.name }}</h4>
+                <h4 class="title-section bg text-uppercase">{{ categories.0.name }}</h4>
             </header>
 
             <div class="card">
@@ -189,7 +189,7 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">{{ products.1.name }}</p>
+                                        <p class="word-limit">{{ products.0.name }}</p>
                                         <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
@@ -197,7 +197,7 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">{{ products.2.name }}</p>
+                                        <p class="word-limit">{{ products.0.name }}</p>
                                         <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
@@ -205,7 +205,7 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">{{ products.3.name }}</p>
+                                        <p class="word-limit">{{ products.0.name }}</p>
                                         <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
@@ -215,7 +215,7 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">{{ products.4.name }}</p>
+                                        <p class="word-limit">{{ products.0.name }}</p>
                                         <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
@@ -223,7 +223,7 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">{{ products.5.name }}</p>
+                                        <p class="word-limit">{{ products.0.name }}</p>
                                         <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
@@ -231,7 +231,7 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">{{ products.6.name }}</p>
+                                        <p class="word-limit">{{ products.0.name }}</p>
                                         <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
@@ -239,7 +239,7 @@
                             <li class="col-6 col-md-3">
                                 <a href="#" class="itembox">
                                     <div class="card-body">
-                                        <p class="word-limit">{{ products.7.name }}</p>
+                                        <p class="word-limit">{{ products.0.name }}</p>
                                         <img class="img-sm" src="images/items/4.png">
                                     </div>
                                 </a>
@@ -327,26 +327,4 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script type="text/javascript">
-        $('.add-to-cart').on("click", function (event) {
-            event.preventDefault();
-            $.ajax({
-                url: "{{ path('add-product') }}",
-                data: {
-                    'produitId': $(this).attr('id'),
-                    'quantite': 1,
-                    'name': $(this).data('name'),
-                    'price': $(this).data('price'),
-                    'image': $(this).data('image'),
-                },
-                success: function () {
-                    $.notify("Article ajouté au panier", "success");
-                },
-                error: function () {
-                    $.notify("Erreur !");
-                }
-            });
-        });
-    </script>
 {% endblock %}

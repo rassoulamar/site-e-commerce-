@@ -30,7 +30,7 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading"><a href="{{ path('admin') }}" > <i class="fas fa-home black" > </i> Tabeau de bord </a>
+        <div class="sidebar-heading"><a href="{{ path('admin') }}" > <i class="fas fa-home #23272b" > </i> Tabeau de bord </a>
         </div>
 
         <div class="list-group list-group-flush">
@@ -73,18 +73,17 @@
         </nav>
 {% block container %}
         <div class="container-fluid ">
-            <div class="row pt-5 pb-9">
-                <div class="col-3 "> <a class="d-block text-center" href="{{ path('user_index') }}" > <span class="d-block" style="font-size: 10em; color: Tomato;">  <i class="fas fa-user"></i>  </span> Utilisateurs </a></div>
-                <div class="col-3 "> <a class="d-block text-center" href="{{ path('categorie_index') }}" > <span class="d-block" style="font-size: 10em; color: Tomato;"> <i class="fas fa-list"></i> </span> Catégories </a></div>
-                <div class="col-3"> <a class="d-block text-center" href="{{ path('product_index') }}" >  <span class="d-block" style="font-size: 10em; color: Tomato;"> <i class="fas fa-laptop"></i> </span> Produits </a></div>
-                <div class="col-3"> <a class="d-block text-center" href="{{ path('user_index') }}" >  <span class="d-block" style="font-size: 10em; color: Tomato;"> <i class="fas fa-images"></i> </span> Images </a></div>
+            <div class="row pt-5 pb-5">
+                <div class="col-3 "> <a style="color:#23272b" class="d-block text-center" href="{{ path('user_index') }}" > <span class="d-block" style="font-size: 5em; color: #23272b;">  <i class="fas fa-user"></i>  </span> Utilisateurs </a></div>
+                <div class="col-3 "> <a style="color:#23272b" class="d-block text-center" href="{{ path('categorie_index') }}" > <span class="d-block" style="font-size: 5em; color: #23272b;"> <i class="fas fa-list"></i> </span> Catégories </a></div>
+                <div class="col-3"> <a style="color:#23272b" class="d-block text-center" href="{{ path('product_index') }}" >  <span class="d-block" style="font-size: 5em; color: #23272b;"> <i class="fas fa-laptop"></i> </span> Produits </a></div>
+                <div class="col-3"> <a style="color:#23272b" class="d-block text-center" href="{{ path('user_index') }}" >  <span class="d-block" style="font-size: 5em; color: #23272b;"> <i class="fas fa-images"></i> </span> Images </a></div>
             </div>
-            <div class="pt-5"></div>
             <div class="row  pt-5 ">
-                <div class="col-3"> <a class="d-block text-center" href="{{ path('user_index') }}" >  <span class="d-block" style="font-size: 10em; color: Tomato;"><i class="fas fa-shopping-cart"></i> </span> Commandes </a></div>
-                <div class="col-3"> <a class="d-block text-center" href="{{ path('user_index') }}" >  <span class="d-block" style="font-size: 10em; color: Tomato;"> <i class="fas fa-truck"></i> </span> Livraisons </a></div>
-                <div class="col-3 "> <a class="d-block text-center" href="{{ path('user_index') }}" > <span class="d-block"style="font-size: 10em; color: Tomato;"> <i class="fas fa-undo"></i> </span> Retours </a></div>
-                <div class="col-3 "> <a class="d-block text-center" href="{{ path('user_index') }}" > <span class="d-block" style="font-size: 10em; color: Tomato;"> <i class="fas fa-euro-sign"></i> </span> Facturation </a></div>
+                <div class="col-3"> <a  style="color:#23272b" class="d-block text-center" href="{{ path('user_index') }}" >  <span class="d-block" style="font-size: 5em; color: #23272b;"><i class="fas fa-shopping-cart"></i> </span> Commandes </a></div>
+                <div class="col-3"> <a  style="color:#23272b" class="d-block text-center" href="{{ path('user_index') }}" >  <span class="d-block" style="font-size: 5em; color: #23272b;"> <i class="fas fa-truck"></i> </span> Livraisons </a></div>
+                <div class="col-3 "> <a  style="color:#23272b" class="d-block text-center" href="{{ path('user_index') }}" > <span class="d-block"style="font-size: 5em; color: #23272b;"> <i class="fas fa-undo"></i> </span> Retours </a></div>
+                <div class="col-3 "> <a style="color:#23272b" class="d-block text-center" href="{{ path('user_index') }}" > <span class="d-block" style="font-size: 5em; color: #23272b;"> <i class="fas fa-euro-sign"></i> </span> Facturation </a></div>
             </div>
         </div>
         {% endblock %}

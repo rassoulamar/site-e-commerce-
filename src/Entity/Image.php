@@ -25,11 +25,6 @@ class Image
     private $path;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $alt;
-
-    /**
      * @Vich\UploadableField(mapping="products", fileNameProperty="path")
      * @var File
      */
@@ -59,11 +54,6 @@ class Image
         return $this;
     }
 
-    public function getAlt(): ?string
-    {
-        return $this->alt;
-    }
-
     /**
      * @return \DateTime
      */
@@ -80,12 +70,6 @@ class Image
         $this->updatedAt = $updatedAt;
     }
 
-    public function setAlt(string $alt): self
-    {
-        $this->alt = $alt;
-
-        return $this;
-    }
 
 
     public function setImageFile(File $path=null )

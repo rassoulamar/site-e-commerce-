@@ -56,26 +56,4 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-
-    <script type="text/javascript">
-        $('.add-to-cart').on("click", function (event) {
-            event.preventDefault();
-            $.ajax({
-                url: "{{ path('add-product') }}",
-                data: {
-                    'produitId': $(this).attr('id'),
-                    'quantite': 1,
-                    'name': $(this).data('name'),
-                    'price': $(this).data('price'),
-                    'image': $(this).data('image'),
-                },
-                success: function () {
-                    $.notify("Article ajouté au panier", "success");
-                },
-                error: function () {
-                    $.notify("Erreur !");
-                }
-            });
-        });
-    </script>
 {% endblock %}

@@ -12,6 +12,7 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -36,7 +37,7 @@ class FrontPanierController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      * @throws \Exception
-     *      * @Route("/panier/ajout-produit", name="add-product")
+     * @Route("/panier/ajout-produit", name="add-product")
 
      */
     public function addToPanier(Request $request, EntityManagerInterface $entityManager)
@@ -46,6 +47,7 @@ class FrontPanierController extends AbstractController
         $price = $request->query->get('price');
         $image = $request->query->get('image');
         $name = $request->query->get('name');
+        $compteur = $request->query->get('compteur');
 
         $session = $this->get('session');
 
@@ -59,9 +61,12 @@ class FrontPanierController extends AbstractController
         $panier[$produitId]['price'] = $price;
         $panier[$produitId]['image'] = $image;
         $panier[$produitId]['name'] = $name;
+        $panier[$produitId]['compteur'] = isset($panier[$produitId]['compteur']) ? $panier[$produitId]['compteur'] + 1: $compteur;
+
 
         $session->set('panier', $panier);
 
+        dump($panier);
         // Insertion en base
         /** @var User $user */
         $user = $this->getUser();
@@ -87,9 +92,5 @@ class FrontPanierController extends AbstractController
         $entityManager->flush();
 
         return new Response();
-    }
-
-    public function validerLePanier() {
-
     }
 }

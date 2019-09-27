@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Bienvenue chez O Yes Télécom!{% endblock %}</title>
+    <title>{% block title %} Bienvenue chez O Yes Télécom! {% endblock %}</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -166,12 +165,19 @@
                             <div class="col-auto">
                                 <a href="{{ path('panier') }}" class="widget-header">
                                     <div class="icontext">
-                                        <div class="icon-wrap"><i
-                                                    class="text-secondary icon-sm fa fa-shopping-cart"></i></div>
+                                        <div class="icon-wrap"> <i class="text-secondary icon-sm fa fa-shopping-cart"></i></div>
                                         <div class="text-wrap text-dark">
-                                            Panier
-                                        </div>
+                                            <span class="small round badge badge-secondary">
+                                                {% if app.user %}
+
+                                                {% else %}
+                                                0
+                                                {% endif %}
+
+                                            </span>
+                                           <div> Panier </div>
                                     </div>
+                                        </div>
                                 </a>
                             </div> <!-- col.// -->
                             <div class="col-auto">
@@ -275,6 +281,33 @@
     <!-- ========================= FOOTER END // ========================= -->
 {% endblock %}
 
-{% block javascripts %}{% endblock %}
-</body>
-</html>
+{% block javascripts %}
+<script type="text/javascript">
+    let $compteur =0;
+    $('.add-to-cart').on("click", function (event) {
+        event.preventDefault();
+        $compteur++;
+        console.log($compteur);
+        $.ajax({
+            url: "{{ path('add-product') }}",
+            data: {
+                'produitId': $(this).attr('id'),
+                'quantite': 1,
+                'name': $(this).data('name'),
+                'price': $(this).data('price'),
+                'image': $(this).data('image'),
+                'compteur':$compteur,
+            },
+            success: function () {
+                $.notify("Article ajouté au panier", "success");
+            },
+            error: function () {
+                $.notify("Erreur !");
+            }
+        });
+    });
+    </script>
+{% endblock %}
+    </body>
+
+    </html>
