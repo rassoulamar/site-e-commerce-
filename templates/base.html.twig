@@ -36,7 +36,11 @@
 
     <!-- custom javascript -->
     <script src="/js/script.js" type="text/javascript"></script>
+
     <script src="/js/notify.js" type="text/javascript"></script>
+
+    <script src="/js/dist/sweetalert2.all.js"></script>
+    <link rel="stylesheet" href="/js/dist/sweetalert2.css">
 
     {% block stylesheets %}{% endblock %}
 
@@ -167,13 +171,8 @@
                                     <div class="icontext">
                                         <div class="icon-wrap"> <i class="text-secondary icon-sm fa fa-shopping-cart"></i></div>
                                         <div class="text-wrap text-dark">
-                                            <span class="small round badge badge-secondary">
-                                                {% if app.user %}
-
-                                                {% else %}
-                                                0
-                                                {% endif %}
-
+                                            <span id='compteur' class="small round badge badge-secondary">
+                                                        {{ render(controller('App\\Controller\\FrontHomeMenuController::getPanierLength')) }}
                                             </span>
                                            <div> Panier </div>
                                     </div>
@@ -283,11 +282,8 @@
 
 {% block javascripts %}
 <script type="text/javascript">
-    let $compteur =0;
     $('.add-to-cart').on("click", function (event) {
         event.preventDefault();
-        $compteur++;
-        console.log($compteur);
         $.ajax({
             url: "{{ path('add-product') }}",
             data: {
@@ -296,13 +292,27 @@
                 'name': $(this).data('name'),
                 'price': $(this).data('price'),
                 'image': $(this).data('image'),
-                'compteur':$compteur,
             },
+
             success: function () {
-                $.notify("Article ajouté au panier", "succes");
+               // $.notify("Article ajouté au panier", "succes");
+                Swal.fire({
+                    position: 'center',
+                    type: 'success',
+                    title: 'Le produit est ajouté au panier avec succes',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
             },
             error: function () {
-                $.notify("Erreur !");
+                // $.notify("Erreur !");
+                Swal.fire({
+                    position: 'center',
+                    type: 'error',
+                    title: 'Désolé !! une erreur s\'est produite , réessayer plustard',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
             }
         });
     });

@@ -47,7 +47,6 @@ class FrontPanierController extends AbstractController
         $price = $request->query->get('price');
         $image = $request->query->get('image');
         $name = $request->query->get('name');
-        $compteur = $request->query->get('compteur');
 
         $session = $this->get('session');
 
@@ -61,36 +60,58 @@ class FrontPanierController extends AbstractController
         $panier[$produitId]['price'] = $price;
         $panier[$produitId]['image'] = $image;
         $panier[$produitId]['name'] = $name;
-        $panier[$produitId]['compteur'] = isset($panier[$produitId]['compteur']) ? $panier[$produitId]['compteur'] + 1: $compteur;
 
 
         $session->set('panier', $panier);
-
-        dump($panier);
-        // Insertion en base
-        /** @var User $user */
-        $user = $this->getUser();
-        $panier = $user->getPanier();
-        if(!$panier) {
-            $panier = new Panier();
-            $panier->setUser($user)->setCreatedAt(new \DateTime('now'));
-        }
-        $entityManager->persist($panier);
-        $entityManager->flush();
-
-        $productRepository = $entityManager->getRepository(Product::class);
-        $product = $productRepository->find($produitId);
-
-        $panierProduct = new PanierProduct();
-        $panierProduct
-            ->setPanier($panier)
-            ->setProduct($product)
-            ->setQuantity($quantite)
-        ;
-
-        $entityManager->persist($panierProduct);
-        $entityManager->flush();
+//
+//        $quantite = $panier[$produitId]['quantite'];
+//
+//        // Insertion en base
+//        /** @var User $user */
+//        $user = $this->getUser();
+//        $panier = $user->getPanier();
+//        if(!$panier) {
+//            $panier = new Panier();
+//            $panier->setUser($user)->setCreatedAt(new \DateTime('now'));
+//        }
+//        $entityManager->persist($panier);
+//        $entityManager->flush();
+//
+//        $productRepository = $entityManager->getRepository(Product::class);
+//        $product = $productRepository->find($produitId);
+//
+//        $panierProductProduct = $entityManager->getRepository(PanierProduct::class);
+//        $panierProduct = $panierProductProduct->findOneBy([
+//            'panier'    => $panier,
+//            'product'   => $product,
+//        ]);
+//
+//        $panierProduct = $panierProduct ? : new PanierProduct();
+//        $panierProduct
+//            ->setPanier($panier)
+//            ->setProduct($product)
+//            ->setQuantity($quantite)
+//        ;
+//
+//        $entityManager->persist($panierProduct);
+//        $entityManager->flush();
 
         return new Response();
     }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("/panier/erase-panier", name="erase-panier")
+     */
+    public function erasePanier(Request $request){
+
+        $session = $this->get('session');
+        $panier= [];
+        $session->set('panier', $panier);
+
+        return new Response();
+
+    }
 }
+

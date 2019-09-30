@@ -73,194 +73,64 @@
 
     <!-- ========================= SECTION CONTENT ========================= -->
     {% for categorie in categories %}
-    <section class="section-content padding-y-sm bg">
-        <div class="container">
+        <section class="section-content padding-y-sm bg">
+            <div class="container">
 
-            <header class="section-heading heading-line">
-                <h4 class="title-section bg">{{ categorie.name }}</h4>
-            </header>
-            <div class="card">
-                <div class="row no-gutters">
-                    <div class="col-md-3">
-                        <article href="#" class="card-banner h-100 bg2">
-                            <div class="card-body zoom-wrap">
-                                <h5 class="title">Achetez votre smartphone aux meilleurs prix </h5>
-                                <p> Lorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, cLorem ipsum dolor sit
-                                    amet, cLorem ipsum dolor sit amet, c</p>
-                                <a href="#" class="btn btn-secondary">Explore la catégorie </a>
-                                <img src="images/items/4.png" height="200" class="img-bg zoom-in">
-                            </div>
-                        </article>
+                <header class="section-heading heading-line">
+                    <h4 class="title-section bg">{{ categorie.name }} </h4>
+                </header>
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-3 bg2">
+                                <div class="card-body zoom-wrap">
+                                    <h5 class="title">Achetez votre smartphone aux meilleurs prix </h5>
+                                    <p> Lorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, cLorem ipsum dolor sit
+                                        amet, cLorem ipsum dolor sit amet, c</p>
+                                    <div>
+                                    <img src="images/items/4.png" height="200" style="vertical-align: center" class="figure-img zoom-in">
+                                    <a href="/menu/{{ categorie.slug }}" class="btn btn-secondary"> {{ categorie.name }} > Voir tout  </a>
+                                    </div>
+                                </div>
 
-                    </div> <!-- col.// -->
+                        </div> <!-- col.// -->
 
-                            <div class="col-md-9">
-                                <ul class="row no-gutters border-cols">
+                        <div class="col-md-9">
+                            <ul class="row no-gutters border-cols">
 
-                                    {% for product in products %}
-                                    {% if  loop.index <= 4 %}
+                                {% for product in products|shuffle if product.categorie.id == (categorie.id)  %}
+                                    {% if loop.index <=8 %}
 
                                     <li class="col-6 col-md-3">
                                         <a href="#" class="itembox">
                                             <div class="card-body">
-                                                <p class="word-limit">{{ product.name }}  </p>
-                                                <img class="img-sm" src="/images/products/{{product.image.path}}">
+                                                <p class="word-limit"> {{ product.name }} </p>
+                                                <img class="img-md" src="/images/products/{{ product.image.path }}">
                                             </div>
                                         </a>
-                                        <span>
-                                    <a href="#" class="btn btn-secondary add-to-cart" id="{{ product.id }}"
+                                        <div class="text-center">
+                                    <a href="#" class="mb-2 btn btn-secondary add-to-cart"  id="{{ product.id }}"
                                        data-name="{{ product.name }}" data-price="{{ product.price }}"
                                        data-image="{{ product.image ? product.image.path : '#' }}"
                                     >
                                         Ajouter au Panier
                                     </a>
-                                </span>
+                                </div>
                                     </li>
                                     {% endif %}
-                                    {% endfor %}
-                                </ul>
-                                <ul class="row no-gutters border-cols">
+                                {% endfor %}
+                            </ul>
 
-                                    {% for product in products %}
-                                        {% if  loop.index <= 4 %}
-
-                                            <li class="col-6 col-md-3">
-                                                <a href="#" class="itembox">
-                                                    <div class="card-body">
-                                                        <p class="word-limit">{{ product.name }}  </p>
-                                                        <img class="img-sm" src="/images/products/{{product.image.path}}">
-                                                    </div>
-                                                </a>
-                                                <span>
-                                    <a href="#" class="btn btn-secondary add-to-cart" id="{{ product.id }}"
-                                       data-name="{{ product.name }}" data-price="{{ product.price }}"
-                                       data-image="{{ product.image ? product.image.path : '#' }}"
-                                    >
-                                        Ajouter au Panier
-                                    </a>
-                                </span>
-                                            </li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div> <!-- col.// -->
+                        </div> <!-- col.// -->
 
 
-                </div> <!-- row.// -->
+                    </div> <!-- row.// -->
 
-            </div> <!-- card.// -->
+                </div> <!-- card.// -->
 
-        </div> <!-- container .//  -->
-    </section>
+            </div> <!-- container .//  -->
+        </section>
     {% endfor %}
     <!-- ========================= SECTION CONTENT END// ========================= -->
-
-    <!-- ========================= SECTION CONTENT ========================= -->
-  {#  <section class="section-content padding-y-sm bg">
-        <div class="container">
-
-            <header class="section-heading heading-line">
-                <h4 class="title-section bg text-uppercase">{{ categories.1.name }}</h4>
-            </header>
-
-            <div class="card">
-                <div class="row no-gutters">
-                    <div class="col-md-3">
-
-                        <article href="#" class="card-banner h-100 bg2">
-                            <div class="card-body zoom-wrap">
-                                <h5 class="title">Trouvez une tablette pour vous et vous enfants </h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <a href="#" class="btn btn-secondary">Explore la catégorie</a>
-                                <img src="images/items/4.png" height="200" class="img-bg zoom-in">
-                            </div>
-                        </article>
-
-                    </div> <!-- col.// -->
-                    <div class="col-md-9">
-                        <ul class="row no-gutters border-cols">
-                            <li class="col-6 col-md-3">
-                                <a href="#" class="itembox">
-                                    <div class="card-body">
-                                        <p class="word-limit">{{ products.0.name }} </p>
-                                        <img class="img-sm" src="images/items/4.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="col-6 col-md-3">
-                                <a href="#" class="itembox">
-                                    <div class="card-body">
-                                        <p class="word-limit">{{ products.0.name }}</p>
-                                        <img class="img-sm" src="images/items/4.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="col-6 col-md-3">
-                                <a href="#" class="itembox">
-                                    <div class="card-body">
-                                        <p class="word-limit">{{ products.0.name }}</p>
-                                        <img class="img-sm" src="images/items/4.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="col-6 col-md-3">
-                                <a href="#" class="itembox">
-                                    <div class="card-body">
-                                        <p class="word-limit">{{ products.0.name }}</p>
-                                        <img class="img-sm" src="images/items/4.png">
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="row no-gutters border-cols">
-                            <li class="col-6 col-md-3">
-                                <a href="#" class="itembox">
-                                    <div class="card-body">
-                                        <p class="word-limit">{{ products.0.name }}</p>
-                                        <img class="img-sm" src="images/items/4.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="col-6 col-md-3">
-                                <a href="#" class="itembox">
-                                    <div class="card-body">
-                                        <p class="word-limit">{{ products.0.name }}</p>
-                                        <img class="img-sm" src="images/items/4.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="col-6 col-md-3">
-                                <a href="#" class="itembox">
-                                    <div class="card-body">
-                                        <p class="word-limit">{{ products.0.name }}</p>
-                                        <img class="img-sm" src="images/items/4.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="col-6 col-md-3">
-                                <a href="#" class="itembox">
-                                    <div class="card-body">
-                                        <p class="word-limit">{{ products.0.name }}</p>
-                                        <img class="img-sm" src="images/items/4.png">
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
-
-            </div> <!-- card.// -->
-
-        </div> <!-- container .//  -->
-    </section>
-    <!-- ========================= SECTION CONTENT END// ========================= -->#}
-
-
-
-
-
-
 
 
     <!-- ========================= Les plus vendues  ========================= -->
@@ -272,10 +142,10 @@
 
             <div class="row-sm">
 
-                {% for product in products %}
+                {% for product in products|shuffle|slice(0, 12) %}
                     <div class="col-md-3">
                         <figure class="card card-product">
-                            <div class="img-wrap"><img src="/images/products/{{product.image.path}}"></div>
+                            <div class="img-wrap"><img src="/images/products/{{ product.image.path }}"></div>
                             <figcaption class="info-wrap">
                                 <h6 class="title "><a href="#">{{ product.name }} </a></h6>
                                 <div class="price-wrap">
