@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Panier;
+use App\Entity\Commande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Panier|null find($id, $lockMode = null, $lockVersion = null)
- * @method Panier|null findOneBy(array $criteria, array $orderBy = null)
- * @method Panier[]    findAll()
- * @method Panier[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Commande|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Commande|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Commande[]    findAll()
+ * @method Commande[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PanierRepository extends ServiceEntityRepository
+class CommandeRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Panier::class);
+        parent::__construct($registry, Commande::class);
     }
 
     // /**
-    //  * @return Panier[] Returns an array of Panier objects
+    //  * @return Commande[] Returns an array of Commande objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PanierRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Panier
+    public function findOneBySomeField($value): ?Commande
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

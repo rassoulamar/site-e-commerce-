@@ -68,10 +68,7 @@ class Product
      */
     private $marque;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PanierProduct", mappedBy="product")
-     */
-    private $panierProducts;
+
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
@@ -89,9 +86,15 @@ class Product
      */
     private $size;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneCommande", mappedBy="product")
+     */
+    private $ligneCommandes;
+
+
     public function __construct()
     {
-        $this->panierProducts = new ArrayCollection();
+        $this->ligneCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,36 +162,7 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|PanierProduct[]
-     */
-    public function getPanierProducts(): Collection
-    {
-        return $this->panierProducts;
-    }
 
-    public function addPanierProduct(PanierProduct $panierProduct): self
-    {
-        if (!$this->panierProducts->contains($panierProduct)) {
-            $this->panierProducts[] = $panierProduct;
-            $panierProduct->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removePanierProduct(PanierProduct $panierProduct): self
-    {
-        if ($this->panierProducts->contains($panierProduct)) {
-            $this->panierProducts->removeElement($panierProduct);
-            // set the owning side to null (unless already changed)
-            if ($panierProduct->getProduct() === $this) {
-                $panierProduct->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getImage(): ?Image
     {
@@ -225,5 +199,37 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return Collection|LigneCommande[]
+     */
+    public function getLigneCommandes(): Collection
+    {
+        return $this->ligneCommandes;
+    }
+
+    public function addLigneCommande(LigneCommande $ligneCommande): self
+    {
+        if (!$this->ligneCommandes->contains($ligneCommande)) {
+            $this->ligneCommandes[] = $ligneCommande;
+            $ligneCommande->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigneCommande(LigneCommande $ligneCommande): self
+    {
+        if ($this->ligneCommandes->contains($ligneCommande)) {
+            $this->ligneCommandes->removeElement($ligneCommande);
+            // set the owning side to null (unless already changed)
+            if ($ligneCommande->getProduct() === $this) {
+                $ligneCommande->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PanierRepository")
  */
-class Panier
+class Commande
 {
     /**
      * @ORM\Id()
@@ -24,18 +24,22 @@ class Panier
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="panier",)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commandes")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PanierProduct", mappedBy="panier")
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneCommande", mappedBy="commande")
      */
-    private $panierProducts;
+    private $ligneCommandes;
+
+
+
+
 
     public function __construct()
     {
-        $this->panierProducts = new ArrayCollection();
+        $this->ligneCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,33 +72,34 @@ class Panier
     }
 
     /**
-     * @return Collection|PanierProduct[]
+     * @return Collection|LigneCommande[]
      */
-    public function getPanierProducts(): Collection
+    public function getLigneCommandes(): Collection
     {
-        return $this->panierProducts;
+        return $this->ligneCommandes;
     }
 
-    public function addPanierProduct(PanierProduct $panierProduct): self
+    public function addLigneCommande(LigneCommande $ligneCommande): self
     {
-        if (!$this->panierProducts->contains($panierProduct)) {
-            $this->panierProducts[] = $panierProduct;
-            $panierProduct->setPanier($this);
+        if (!$this->ligneCommandes->contains($ligneCommande)) {
+            $this->ligneCommandes[] = $ligneCommande;
+            $ligneCommande->setCommande($this);
         }
 
         return $this;
     }
 
-    public function removePanierProduct(PanierProduct $panierProduct): self
+    public function removeLigneCommande(LigneCommande $ligneCommande): self
     {
-        if ($this->panierProducts->contains($panierProduct)) {
-            $this->panierProducts->removeElement($panierProduct);
+        if ($this->ligneCommandes->contains($ligneCommande)) {
+            $this->ligneCommandes->removeElement($ligneCommande);
             // set the owning side to null (unless already changed)
-            if ($panierProduct->getPanier() === $this) {
-                $panierProduct->setPanier(null);
+            if ($ligneCommande->getCommande() === $this) {
+                $ligneCommande->setCommande(null);
             }
         }
 
         return $this;
     }
+
 }

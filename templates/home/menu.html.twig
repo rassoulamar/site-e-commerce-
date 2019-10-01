@@ -21,14 +21,14 @@
                         {% for categorie in category %}
                         <div class="col-md-3">
                             <figure class="card card-product">
-                                <div class="img-wrap"> <img src="/images/products/{{product.image.path }}"></div>
+                                <a href="/menu/{{ product.categorie.slug }}/{{ product.slug }}"> <div class="img-wrap"> <img src="/images/products/{{product.image.path }}"></div></a>
                                 <figcaption class="info-wrap">
                                     <h6 class="title "><a href="/menu/{{ categorie.slug }}/{{product.slug}}">{{product.name}} </a></h6>
                                     <div class="price-wrap">
-                                        <span class="price-new">Prix: {{product.price}}</span></br>
-                                        <span class="price-old">Marque: {{product.name}}</span></br>
+                                        <span class="price-new">Prix: {{product.price}} €</span></br>
+                                        <span class="price-old">Marque: {{product.name}} </span></br>
                                         <span>
-                                    <a href="#" class="btn btn-secondary add-to-cart" id="{{ product.id }}"
+                                    <a href="#" class="btn btn-outline-danger add-to-cart" id="{{ product.id }}"
                                        data-name="{{ product.name }}" data-price="{{ product.price }}"
                                        data-image="{{ product.image ? product.image.path : '#' }}"
                                     >

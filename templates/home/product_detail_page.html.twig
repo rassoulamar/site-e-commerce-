@@ -7,31 +7,46 @@
     {% endblock %}
 {% endblock %}
 {% block body %}
-<div class="container">
-    <div class="card p-4 m-4">
-        <header class="section-heading heading-line">
-            <h4 class="title-section bg text-uppercase">
-                {% for product in products %}
+    <div class="container">
+        <div class="card p-4 m-4">
+            <header class="section-heading heading-line">
+                <h4 class="title-section bg text-uppercase">
+                    {% for product in products %}
                     {{ product.name }}
 
-            </h4>
-        </header>
-        <div class="row">
-            <div class="col-6">
-        <div class="img-wrap"> <img src="/images/products/{{product.image.path}}"></div>
+                </h4>
+            </header>
+            <div class="row">
+                <div class="col-6">
+                    <div class="img-wrap"> <img src="/images/products/{{product.image.path}}"></div>
+                </div>
+                <div class="col-6" style="font-size: medium">
+                    <div class="row bg-light" style="font-weight: bold "> Description: </div>
+                    <div class="row bg-dark-gray"> {{ product.description }}</div>
+                    <div class="row bg-light" style="font-weight: bold "> Prix: </div>
+                    <div class="row bg-dark-gray">{{ product.price }} €</div>
+                    <div class="row bg-light" style="font-weight: bold "> Marque: </div>
+                    <div class="row bg-dark-gray"> {{ product.marque.name }}</div>
+                    <div class="row bg-light" style="font-weight: bold "> Coleur: </div>
+                    <div class="row bg-dark-gray">{{ product.color }}</div>
+                    <div class="row bg-light" style="font-weight: bold "> Capacité/Taille: </div>
+                    <div class="row bg-dark-gray">{{ product.size }}</div>
+                    <div class="row bg-light" style="font-weight: bold "> Catégorie: </div>
+                    <div class="row bg-dark-gray"> {{ product.categorie.name }}</div>
+
+                    <div>
+                        <a href="#" class="btn btn-outline-danger add-to-cart" id="{{ product.id }}"
+                           data-name="{{ product.name }}" data-price="{{ product.price }}"
+                           data-image="{{ product.image ? product.image.path : '#' }}">
+                            Ajouter au Panier
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-        <div> {{ product.description }}</div>
-        <div>{{ product.price }}</div>
-        <div>{{ product.marque.name }}</div>
-        <div>{{ product.color }}</div>
-        <div>{{ product.size }}</div>
-            </div>
+
+
+            {% endfor %}
         </div>
 
-
-        {% endfor %}
     </div>
-
-</div>
 {% endblock %}

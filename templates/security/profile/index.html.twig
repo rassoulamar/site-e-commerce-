@@ -1,0 +1,16 @@
+
+{% extends 'base.html.twig' %}
+{% block head %}{% endblock %}
+{% block body %}
+    <div class="mx-auto m-4" style="width:500px">
+        <h3>Mon compte </h3>
+        id: {{ app.user.id }} <br>
+        id: {{ app.user.firstName }} <br>
+        id: {{ app.user.lastName }} <br>
+        id: {{ app.user.email }} <br>
+    </div>
+
+    <h1>index</h1>
+    {{app.user.id}} {{ app.user.firstName  }} <br>
+    <a href="/profile/{{app.user.id}}" {{app.user.id}}> modifier</a>
+{% endblock %}

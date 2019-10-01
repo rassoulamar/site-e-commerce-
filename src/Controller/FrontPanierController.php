@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Panier;
-use App\Entity\PanierProduct;
+use App\Entity\Commande;
+use App\Entity\LigneCommande;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Repository\CategorieRepository;
-use App\Repository\PanierRepository;
+use App\Repository\CommandeRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,7 +71,7 @@ class FrontPanierController extends AbstractController
 //        $user = $this->getUser();
 //        $panier = $user->getPanier();
 //        if(!$panier) {
-//            $panier = new Panier();
+//            $panier = new Commande();
 //            $panier->setUser($user)->setCreatedAt(new \DateTime('now'));
 //        }
 //        $entityManager->persist($panier);
@@ -80,13 +80,13 @@ class FrontPanierController extends AbstractController
 //        $productRepository = $entityManager->getRepository(Product::class);
 //        $product = $productRepository->find($produitId);
 //
-//        $panierProductProduct = $entityManager->getRepository(PanierProduct::class);
+//        $panierProductProduct = $entityManager->getRepository(LigneCommande::class);
 //        $panierProduct = $panierProductProduct->findOneBy([
 //            'panier'    => $panier,
 //            'product'   => $product,
 //        ]);
 //
-//        $panierProduct = $panierProduct ? : new PanierProduct();
+//        $panierProduct = $panierProduct ? : new LigneCommande();
 //        $panierProduct
 //            ->setPanier($panier)
 //            ->setProduct($product)

@@ -14,6 +14,10 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('description')
+            ->add('image',ImageType::class,[
+                'label'=> false
+            ])
         ;
     }
 

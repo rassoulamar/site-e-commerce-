@@ -18,47 +18,34 @@
                         </aside> <!-- col.// -->
                         <div class="col-md-6">
                             <!-- ================= main slide ================= -->
+
                             <div class="owl-init slider-main owl-carousel" data-items="1" data-nav="true"
                                  data-dots="false">
+                                 {% for categorie in categories  %}
                                 <div class="item-slide">
-                                    <img src="assets/img/macbook.jpg">
+                                   <a href="/menu/{{ categorie.slug }}"> <img src="/images/products/{{ categorie.image.path }}"> </a>
                                 </div>
-                                <div class="item-slide">
-                                    <img src="assets/img/ipad.jpg">
-                                </div>
-                                <div class="item-slide">
-                                    <img src="assets/img/airpods.jpg">
-                                </div>
+                                 {% endfor %}
+
                             </div>
                             <!-- ============== main slideshow .end // ============= -->
 
                         </div> <!-- col.// -->
                         <aside class="col-md-3">
 
-                            <h6 class="title-bg bg-secondary"> Meilleurs séléctions</h6>
+                            <h6 class="title-bg bg-secondary"> Produits en promotions</h6>
                             <div style="height:280px;">
+                                {% for product in products|slice(0,3) %}
                                 <figure class="itemside has-bg border-bottom" style="height: 33%;">
-                                    <img class="img-bg" src="images/items/4.png">
+                                    <img class="img-sm" src="images/products/{{product.image.path}}">
                                     <figcaption class="p-2">
-                                        <h6 class="title"> {{ products.0.name }} </h6>
-                                        <a href="#">{{ products.0.price }}</a>
+                                        <h6 class="title"> {{ product.name }} </h6>
+                                        <a href="/menu/{{ product.categorie.slug }}/{{ product.slug }}">{{ product.price }}</a>
+                                        <h6 style="color: red"> -20% </h6>
                                     </figcaption>
                                 </figure>
+                                {% endfor %}
 
-                                <figure class="itemside has-bg border-bottom" style="height: 33%;">
-                                    <img class="img-bg" src="images/items/4.png" height="80">
-                                    <figcaption class="p-2">
-                                        <h6 class="title">{{ products.0.name }} </h6>
-                                        <a href="#">{{ products.0.price }}</a>
-                                    </figcaption>
-                                </figure>
-                                <figure class="itemside has-bg border-bottom" style="height: 33%;">
-                                    <img class="img-bg" src="images/items/4.png" height="80">
-                                    <figcaption class="p-2">
-                                        <h6 class="title">{{ products.0.name }} </h6>
-                                        <a href="#">{{ products.0.name }}</a>
-                                    </figcaption>
-                                </figure>
                             </div>
 
                         </aside>
@@ -82,40 +69,45 @@
                 <div class="card">
                     <div class="row no-gutters">
                         <div class="col-md-3 bg2">
-                                <div class="card-body zoom-wrap">
-                                    <h5 class="title">Achetez votre smartphone aux meilleurs prix </h5>
-                                    <p> Lorem ipsum dolor sit amet, cLorem ipsum dolor sit amet, cLorem ipsum dolor sit
-                                        amet, cLorem ipsum dolor sit amet, c</p>
-                                    <div>
-                                    <img src="images/items/4.png" height="200" style="vertical-align: center" class="figure-img zoom-in">
-                                    <a href="/menu/{{ categorie.slug }}" class="btn btn-secondary"> {{ categorie.name }} > Voir tout  </a>
-                                    </div>
+                            <div class="card-body zoom-wrap">
+
+                                <h5>{{ categorie.description }} </h5>
+                                <br>
+                                <div>
+                                    <img src="/images/products/{{ categorie.image.path }}" height="200"
+                                         style="vertical-align: center" class="img-thumbnail zoom-in">
+                                    <br>
+                                    <br>
+                                    <a href="/menu/{{ categorie.slug }}"
+                                       class="btn btn-outline-danger m-2"> {{ categorie.name }} > Voir tout </a>
+                                    <br>
                                 </div>
+                            </div>
 
                         </div> <!-- col.// -->
 
                         <div class="col-md-9">
                             <ul class="row no-gutters border-cols">
 
-                                {% for product in products|shuffle if product.categorie.id == (categorie.id)  %}
+                                {% for product in products|shuffle if product.categorie.id == (categorie.id) %}
                                     {% if loop.index <=8 %}
 
-                                    <li class="col-6 col-md-3">
-                                        <a href="#" class="itembox">
-                                            <div class="card-body">
-                                                <p class="word-limit"> {{ product.name }} </p>
-                                                <img class="img-md" src="/images/products/{{ product.image.path }}">
-                                            </div>
-                                        </a>
-                                        <div class="text-center">
-                                    <a href="#" class="mb-2 btn btn-secondary add-to-cart"  id="{{ product.id }}"
-                                       data-name="{{ product.name }}" data-price="{{ product.price }}"
-                                       data-image="{{ product.image ? product.image.path : '#' }}"
-                                    >
-                                        Ajouter au Panier
-                                    </a>
-                                </div>
-                                    </li>
+                                        <li class="col-6 col-md-3 border-bottom">
+                                            <a href="/menu/{{ categorie.slug }}/{{ product.slug }}" class="itembox">
+                                                <div class="card-body">
+                                                    <img class="img-md" src="/images/products/{{ product.image.path }}">
+                                                </div>
+                                                <h6 class="word-limit m-2"> {{ product.name }} </h6>
+                                                <span class="m-2" style="color: #23272b"> Prix : {{ product.price }} € </span>
+                                            </a>
+                                                <a href="#" class="m-2 btn btn-outline-danger add-to-cart"
+                                                   id="{{ product.id }}"
+                                                   data-name="{{ product.name }}" data-price="{{ product.price }}"
+                                                   data-image="{{ product.image ? product.image.path : '#' }}"
+                                                >
+                                                    Ajouter au Panier
+                                                </a>
+                                        </li>
                                     {% endif %}
                                 {% endfor %}
                             </ul>
@@ -142,17 +134,17 @@
 
             <div class="row-sm">
 
-                {% for product in products|shuffle|slice(0, 12) %}
+                {% for product in products|shuffle|slice(0, 16) %}
                     <div class="col-md-3">
                         <figure class="card card-product">
-                            <div class="img-wrap"><img src="/images/products/{{ product.image.path }}"></div>
+                          <a href="/menu/{{ product.categorie.slug }}/{{ product.slug }}">  <div class="img-wrap"><img  src="/images/products/{{ product.image.path }}"></div></a>
                             <figcaption class="info-wrap">
-                                <h6 class="title "><a href="#">{{ product.name }} </a></h6>
+                                <h6 class="title "><a href="/menu/{{ product.categorie.slug }}/{{ product.slug }}">{{ product.name }} </a></h6>
                                 <div class="price-wrap">
-                                    <span class="price-new">Prix: {{ product.price }}</span></br>
+                                    <span class="price-new">Prix: {{ product.price }} €</span></br>
                                     <span class="price-old">Marque: {{ product.marque.name }}</span></br>
                                     <span>
-                                    <a href="#" class="btn btn-secondary add-to-cart" id="{{ product.id }}"
+                                    <a href="#" class="btn btn-outline-danger add-to-cart" id="{{ product.id }}"
                                        data-name="{{ product.name }}" data-price="{{ product.price }}"
                                        data-image="{{ product.image ? product.image.path : '#' }}"
                                     >
@@ -164,6 +156,7 @@
                         </figure> <!-- card // -->
                     </div> <!-- col // -->
                 {% endfor %}
+
 
             </div> <!--//row-->
 

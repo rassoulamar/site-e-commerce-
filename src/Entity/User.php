@@ -76,12 +76,6 @@ class User implements UserInterface
     private $lastName;
 
 
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Panier", mappedBy="user")
-     */
-    private $panier;
-
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\AdressBilling", cascade={"persist", "remove"})
      */
@@ -92,8 +86,14 @@ class User implements UserInterface
      */
     private $adressDelivery;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="user")
+     */
+    private $commandes;
+
     public function __construct()
     {
+        $this->commandes = new ArrayCollection();
     }
 
 
@@ -198,23 +198,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPanier()
-    {
-        return $this->panier;
-    }
-
-    /**
-     * @param $panier
-     * @return $this
-     */
-    public function setPanier($panier = null)
-    {
-        $this->panier = $panier;
-        return $this;
-    }
 
     public function getAdressBilling(): ?AdressBilling
     {
@@ -236,6 +219,37 @@ class User implements UserInterface
     public function setAdressDelivery(?AdressDelivery $adressDelivery): self
     {
         $this->adressDelivery = $adressDelivery;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->contains($commande)) {
+            $this->commandes->removeElement($commande);
+            // set the owning side to null (unless already changed)
+            if ($commande->getUser() === $this) {
+                $commande->setUser(null);
+            }
+        }
 
         return $this;
     }

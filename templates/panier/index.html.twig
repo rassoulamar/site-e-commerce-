@@ -3,87 +3,92 @@
 {% block title %}Hello PanierController!{% endblock %}
 
 {% block body %}
-    {% if panier is empty  %}
-<section class="section-main bg padding-y-sm" >
-    <div class="container" id="panier-vide">
-        <div style="text-align: center" >
-            <a href="{{path('home')}}">
-            <img src="/images/logos/panier.png"  width="300">
-            <h3 style="color: black"> Votre panier est vide, ajouter des produits à votre panier !</h3>
-            </a>
-    </div>
-    </div>
-</section>
-    {% else %}
-<section class="section-main bg padding-y-sm" id="panier-remplit">
-    <div class="container">
-        <div class="card">
-    <table class="table">
-        <tr>
-            <th>Image</th>
-            <th>Nom</th>
-            <th>Quantité</th>
-            <th>Prix</th>
-            <th>Prix total</th>
-        </tr>
-        <tbody>
-            {% set total = 0 %}
-            {{dump(panier)}}
-            {% for produit in panier %}
-                <tr>
-                    <td class="w-25"><img src="/images/products/{{ produit.image }}" class="img-sm"></td>
-                    <td>{{ produit.name }}</td>
-                    <td>{{ produit.quantite }}</td>
-                    <td>{{ produit.price }}</td>
-                    <td>{{ produit.price * produit.quantite }}</td>
-                    {% set total = total + (produit.price * produit.quantite) %}
-                </tr>
-            {% endfor %}
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{ total }}</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    </div>
-</section>
-        <div class="container ">
-            <div class="row m-2 mb-4 mt-3 ">
-            <a href="{{ path('adresse_delivery') }}" class="col btn btn-success mr-5 "> Passer la commande <i class="fas fa-credit-card"></i> </a>
-            <a href="{{ path('home') }}" class="col btn btn-primary mr-5"> continuer mes achats <i class="fas fa-shopping-cart"></i> </a>
-            <a href="#" class="col btn btn-danger  erase-panier" > Vider mon panier <i class="fas fa-trash"></i> </a>
+    {% if panier is empty %}
+        <section class="section-main bg padding-y-sm">
+            <div class="container" id="panier-vide">
+                <div style="text-align: center">
+                    <a href="{{ path('home') }}">
+                        <img src="/images/logos/panier.png" width="300">
+                        <h3 style="color: black"> Votre panier est vide, ajouter des produits à votre panier !</h3>
+                    </a>
+                </div>
             </div>
+        </section>
+    {% else %}
+        <div id="panier-remplit">
+            <section class="section-main bg padding-y-sm" >
+                <div class="container">
+                    <div class="card">
+                        <table class="table">
+                            <tr>
+                                <th>Image</th>
+                                <th>Nom</th>
+                                <th>Quantité</th>
+                                <th>Prix</th>
+                                <th>Prix total</th>
+                            </tr>
+                            <tbody>
+                            {% set total = 0 %}
+                            {% for produit in panier %}
+                                <tr>
+                                    <td class="w-25"><img src="/images/products/{{ produit.image }}" class="img-sm">
+                                    </td>
+                                    <td>{{ produit.name }}</td>
+                                    <td>{{ produit.quantite }}</td>
+                                    <td>{{ produit.price }}</td>
+                                    <td>{{ produit.price * produit.quantite }}</td>
+                                    {% set total = total + (produit.price * produit.quantite) %}
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{ total }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <div class="container ">
+                <div class="row m-2 mb-4 mt-3 ">
+                    <a href="{{ path('adresse_delivery') }}" class="col btn btn-success mr-5 "> Passer la commande <i
+                                class="fas fa-credit-card"></i> </a>
+                    <a href="{{ path('home') }}" class="col btn btn-primary mr-5"> continuer mes achats <i
+                                class="fas fa-shopping-cart"></i> </a>
+                    <a href="#" class="col btn btn-danger  erase-panier"> Vider mon panier <i class="fas fa-trash"></i>
+                    </a>
+                </div>
 
+            </div>
         </div>
 
-        {% endif %}
+    {% endif %}
 
 
-<script type="text/javascript">
-    $('.erase-panier').on("click", function (event) {
-        event.preventDefault();
-        $.ajax({
-            url: "{{ path('erase-panier') }}",
-            success: function () {
-                Swal.fire({
-                    position: 'center',
-                    type: 'success',
-                    title: 'Le panier est bien vidé',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-               $("#panier-remplit").load("panier #panier-vide");
+    <script type="text/javascript">
+        $('.erase-panier').on("click", function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "{{ path('erase-panier') }}",
+                success: function () {
+                    Swal.fire({
+                        position: 'center',
+                        type: 'success',
+                        title: 'Le panier est bien vidé',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    $("#panier-remplit").load("panier #panier-vide");
 
-            },
-            error: function () {
+                },
+                error: function () {
 
-            }
+                }
+            });
         });
-    });
     </script>
 {% endblock %}
 

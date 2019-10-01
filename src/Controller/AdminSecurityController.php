@@ -8,10 +8,12 @@ use App\Form\AdresseType;
 use App\Form\LogonType;
 use App\Form\RegisterType;
 use App\Repository\CategorieRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\CsrfFormLoginBundle\Form\UserLoginType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -39,6 +41,31 @@ class AdminSecurityController extends AbstractController
             'form'=>$form->createView(),
         ]);
     }
+
+//    /**
+//     * @Route("/profile",name="my_account")
+//     */
+//    public function index(UserRepository $userRepository): Response
+//    {
+//
+//        return $this->render('security/profile/index.html.twig', [
+//            'users' => $userRepository->findOneBy(['id'=>'id']),
+//
+//        ]);
+//    }
+//
+//
+//
+//    /**
+//     * @Route("/profile/{id}", name="profile_show", methods={"GET"})
+//     */
+//    public function show(User $user): Response
+//    {
+//        return $this->render('security/profile/show.html.twig', [
+//            'user' => $user,
+//        ]);
+//    }
+
 
     /**
      * @Route("/login", name="security_login")

@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\PanierProduct;
+use App\Entity\LigneCommande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method PanierProduct|null find($id, $lockMode = null, $lockVersion = null)
- * @method PanierProduct|null findOneBy(array $criteria, array $orderBy = null)
- * @method PanierProduct[]    findAll()
- * @method PanierProduct[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method LigneCommande|null find($id, $lockMode = null, $lockVersion = null)
+ * @method LigneCommande|null findOneBy(array $criteria, array $orderBy = null)
+ * @method LigneCommande[]    findAll()
+ * @method LigneCommande[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PanierProductRepository extends ServiceEntityRepository
+class LigneCommandeRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, PanierProduct::class);
+        parent::__construct($registry, LigneCommande::class);
     }
 
     // /**
-    //  * @return PanierProduct[] Returns an array of PanierProduct objects
+    //  * @return LigneCommande[] Returns an array of LigneCommande objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PanierProductRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?PanierProduct
+    public function findOneBySomeField($value): ?LigneCommande
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

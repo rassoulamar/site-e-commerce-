@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Panier;
+use App\Entity\Commande;
 use App\Entity\User;
 use App\Form\AdresseType;
 use App\Form\ChangeAdresseDeliveryType;

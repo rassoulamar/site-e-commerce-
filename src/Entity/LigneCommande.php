@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PanierProductRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LigneCommandeRepository")
  */
-class PanierProduct
+class LigneCommande
 {
     /**
      * @ORM\Id()
@@ -18,22 +18,27 @@ class PanierProduct
      */
     private $id;
 
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="panierProducts")
-     */
-    private $product;
-
     /**
      * @ORM\Column(type="integer")
      */
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Panier", inversedBy="panierProducts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commande", inversedBy="ligneCommandes")
      */
-    private $panier;
+    private $commande;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="ligneCommandes")
+     */
+    private $product;
+
+
+
+    public function __construct()
+    {
+    }
+
 
 
     public function getId(): ?int
@@ -53,14 +58,14 @@ class PanierProduct
         return $this;
     }
 
-    public function getPanier(): ?Panier
+    public function getCommande(): ?Commande
     {
-        return $this->panier;
+        return $this->commande;
     }
 
-    public function setPanier(?Panier $panier): self
+    public function setCommande(?Commande $commande): self
     {
-        $this->panier = $panier;
+        $this->commande = $commande;
 
         return $this;
     }
@@ -76,5 +81,4 @@ class PanierProduct
 
         return $this;
     }
-
 }

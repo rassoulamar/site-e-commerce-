@@ -31,6 +31,13 @@ class Image
     private $imageFile;
 
     /**
+     * @Vich\UploadableField(mapping="categories", fileNameProperty="path")
+     * @var File
+     */
+    private $imageCategorie;
+
+
+    /**
      * @ORM\Column(type="datetime")
      * @var \DateTime
      */
@@ -88,6 +95,30 @@ class Image
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageCategorie(): File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $path
+     * @throws \Exception
+     */
+    public function setImageCategorie(File $path = null)
+    {
+        $this->imageCategorie = $path;
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($path) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
 }
