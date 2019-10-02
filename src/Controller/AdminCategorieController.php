@@ -53,7 +53,7 @@ class AdminCategorieController extends AbstractController
      */
     public function show(Categorie $categorie): Response
     {
-        return $this->render('admin/categorie/show.html.twig', [
+        return $this->render('admin/categorie/edit.html.twig', [
             'categorie' => $categorie,
         ]);
     }

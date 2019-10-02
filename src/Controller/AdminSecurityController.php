@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Adresse;
 use App\Entity\User;
 use App\Form\AdresseType;
+use App\Form\EditProfileType;
 use App\Form\LogonType;
 use App\Form\RegisterType;
+use App\Form\UserType;
 use App\Repository\CategorieRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -24,9 +26,12 @@ class AdminSecurityController extends AbstractController
      */
     public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
+
         $user = new User();
         $form =$this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
+        $isSameAdress = $request->request->get('isSameAdress');
+dump($isSameAdress);
         if ($form->isSubmitted() && $form->isValid()){
             $hash= $encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($hash);
@@ -35,36 +40,46 @@ class AdminSecurityController extends AbstractController
             return $this->redirectToRoute('security_login');
 
 
+
         }
 
         return $this->render('security/register.html.twig', [
             'form'=>$form->createView(),
+            'issameadress'=>$isSameAdress,
         ]);
     }
 
-//    /**
-//     * @Route("/profile",name="my_account")
-//     */
-//    public function index(UserRepository $userRepository): Response
-//    {
-//
-//        return $this->render('security/profile/index.html.twig', [
-//            'users' => $userRepository->findOneBy(['id'=>'id']),
-//
-//        ]);
-//    }
-//
-//
-//
-//    /**
-//     * @Route("/profile/{id}", name="profile_show", methods={"GET"})
-//     */
-//    public function show(User $user): Response
-//    {
-//        return $this->render('security/profile/show.html.twig', [
-//            'user' => $user,
-//        ]);
-//    }
+    /**
+     * @Route("/profile",name="my_account")
+     */
+    public function index()
+    {
+        return $this->render('security/profile/index.html.twig');
+    }
+
+
+
+    /**
+     * @Route("/profile/edit/{id}", name="profile_edit", methods={"GET"})
+     */
+    public function show(Request $request,User $user,UserPasswordEncoderInterface $encoder)
+    {
+        $form = $this->createForm(EditProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+//            $hash= $encoder->encodePassword($user,$user->getPassword());
+//            $user->setPassword($hash);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('my_account');
+        }
+
+        return $this->render('security/profile/edit.html.twig',[
+            'form' => $form->createView(),
+        ]);
+
+    }
 
 
     /**

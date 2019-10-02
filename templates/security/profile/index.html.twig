@@ -2,15 +2,31 @@
 {% extends 'base.html.twig' %}
 {% block head %}{% endblock %}
 {% block body %}
-    <div class="mx-auto m-4" style="width:500px">
+    <div class="mx-auto m-4" style="width:60%">
         <h3>Mon compte </h3>
-        id: {{ app.user.id }} <br>
-        id: {{ app.user.firstName }} <br>
-        id: {{ app.user.lastName }} <br>
-        id: {{ app.user.email }} <br>
+
+        <div class="row bg-dark-gray" style="font-weight: bold "> Nom:</div>
+        <div class="row bg-light">{{ app.user.firstName }}</div>
+        <div class="row bg-dark-gray" style="font-weight: bold ">Prénom:</div>
+        <div class="row bg-light">{{ app.user.lastName }}</div>
+        <div class="row bg-dark-gray" style="font-weight: bold ">Email:</div>
+        <div class="row bg-light">{{ app.user.email }}</div>
+        <div class="row bg-dark-gray" style="font-weight: bold ">Adresse de livraison:</div>
+        <div class="row bg-light">
+            {{ app.user.adressDelivery.street }} <br>
+            {{ app.user.adressDelivery.ville.zipCode }}  {{ app.user.adressDelivery.ville.name }}<br>
+            {{ app.user.adressDelivery.ville.country.name }}<br>
+        </div>
+        <div class="row bg-dark-gray" style="font-weight: bold ">Adresse de Facturation:</div>
+        <div class="row bg-light">
+            {{ app.user.adressBilling.street }} <br>
+            {{ app.user.adressBilling.ville.zipCode }}  {{ app.user.adressBilling.ville.name }}<br>
+            {{ app.user.adressBilling.ville.country.name }}<br>
+        </div>
+        <div>
+            <a role="button" class="btn btn-outline-dark m-2" href="{{ path('profile_edit', {'id': app.user.id}) }}"> Modifier mes coordonnées</a>
+        </div>
     </div>
 
-    <h1>index</h1>
-    {{app.user.id}} {{ app.user.firstName  }} <br>
-    <a href="/profile/{{app.user.id}}" {{app.user.id}}> modifier</a>
+
 {% endblock %}

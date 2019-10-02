@@ -24,15 +24,10 @@ class AdressBilling
     private $street;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="adressBilling")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="adressBilling",cascade={"persist"})
      */
     private $ville;
 
-
-    public function __construct()
-    {
-        $this->ville = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {

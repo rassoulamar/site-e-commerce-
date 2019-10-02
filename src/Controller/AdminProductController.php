@@ -53,7 +53,7 @@ class AdminProductController extends AbstractController
      */
     public function show(Product $product): Response
     {
-        return $this->render('admin/product/show.html.twig', [
+        return $this->render('admin/product/edit.html.twig', [
             'product' => $product,
         ]);
     }

@@ -49,21 +49,6 @@ class User implements UserInterface
      */
     private $confirm_password;
 
-    /**
-     * @return mixed
-     */
-    public function getConfirmPassword()
-    {
-        return $this->confirm_password;
-    }
-
-    /**
-     * @param mixed $confirm_password
-     */
-    public function setConfirmPassword($confirm_password): void
-    {
-        $this->confirm_password = $confirm_password;
-    }
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -90,6 +75,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="user")
      */
     private $commandes;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $sameAdressDB =true;
 
     public function __construct()
     {
@@ -157,6 +147,23 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmPassword()
+    {
+        return $this->confirm_password;
+    }
+
+    /**
+     * @param mixed $confirm_password
+     */
+    public function setConfirmPassword($confirm_password): void
+    {
+        $this->confirm_password = $confirm_password;
+    }
+
 
     /**
      * @see UserInterface
@@ -250,6 +257,18 @@ class User implements UserInterface
                 $commande->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSameAdressDB(): ?bool
+    {
+        return $this->sameAdressDB;
+    }
+
+    public function setSameAdressDB(?bool $sameAdressDB): self
+    {
+        $this->sameAdressDB = $sameAdressDB;
 
         return $this;
     }
