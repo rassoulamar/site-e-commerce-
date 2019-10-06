@@ -72,7 +72,7 @@
         $('.erase-panier').on("click", function (event) {
             event.preventDefault();
             $.ajax({
-                url: "{{ path('erase-panier') }}",
+                url: "{{ path('reset-panier') }}",
                 success: function () {
                     Swal.fire({
                         position: 'center',
@@ -82,11 +82,9 @@
                         timer: 3000
                     });
                     $("#panier-remplit").load("panier #panier-vide");
+                    $('#compteur').text(0);
 
                 },
-                error: function () {
-
-                }
             });
         });
     </script>

@@ -49,17 +49,17 @@ class AdminCategorieController extends AbstractController
     }
 
     /**
-     * @Route("/admin/categorie/{id}", name="categorie_show", methods={"GET"})
+     * @Route("/{id}", name="categorie_show", methods={"GET"})
      */
     public function show(Categorie $categorie): Response
     {
-        return $this->render('admin/categorie/edit.html.twig', [
+        return $this->render('admin/categorie/show.html.twig', [
             'categorie' => $categorie,
         ]);
     }
 
     /**
-     * @Route("admin/categorie/{id}/edit", name="categorie_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="categorie_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Categorie $categorie): Response
     {

@@ -10,11 +10,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
-
 /**
  * @UniqueEntity("email",message="cet Email existe deja connectez vous ou proceder à mot de passe oublié dans la rubrique mon compte")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
+
 class User implements UserInterface
 {
     /**
@@ -271,5 +272,20 @@ class User implements UserInterface
         $this->sameAdressDB = $sameAdressDB;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function addIfSameAdress()
+    {
+        if($this->sameAdressDB) {
+            $adressBilling = new AdressBilling();
+            $adressBilling
+                ->setStreet($this->getAdressDelivery()->getStreet())
+                ->setVille($this->getAdressDelivery()->getVille())
+            ;
+            $this->adressBilling = $adressBilling;
+        }
     }
 }

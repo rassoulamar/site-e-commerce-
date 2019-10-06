@@ -19,7 +19,7 @@ class FrontAdresseDeliveryController extends AbstractController
     /**
      * @Route("/validate-adresse-delivry", name="adresse_delivery")
      */
-    public function index(Request $request, EntityManagerInterface $entityManager,ObjectManager $manager)
+    public function index(Request $request,ObjectManager $manager)
     {
 
         $user = $this->getUser();

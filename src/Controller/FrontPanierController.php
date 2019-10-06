@@ -61,8 +61,13 @@ class FrontPanierController extends AbstractController
         $panier[$produitId]['image'] = $image;
         $panier[$produitId]['name'] = $name;
 
+        $quantiteGlobale = 0;
+        foreach ($panier as $produit) {
+            $quantiteGlobale += $produit['quantite'];
+        }
 
         $session->set('panier', $panier);
+        $session->set('quantiteGlobale', $quantiteGlobale);
 //
 //        $quantite = $panier[$produitId]['quantite'];
 //
@@ -96,20 +101,20 @@ class FrontPanierController extends AbstractController
 //        $entityManager->persist($panierProduct);
 //        $entityManager->flush();
 
-        return new Response();
+        return new Response($quantiteGlobale);
     }
 
     /**
      * @param Request $request
      * @return Response
-     * @Route("/panier/erase-panier", name="erase-panier")
+     * @Route("/panier/reset-panier", name="reset-panier")
      */
-    public function erasePanier(Request $request){
+    public function resetPanier(){
 
         $session = $this->get('session');
         $panier= [];
         $session->set('panier', $panier);
-
+        $session->set('quantiteGlobale', 0);
         return new Response();
 
     }

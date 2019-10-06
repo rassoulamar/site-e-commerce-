@@ -33,6 +33,21 @@ class Commande
      */
     private $ligneCommandes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\DeliveryMethod", inversedBy="commandes")
+     */
+    private $deliveryMethod;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PaymentMethod", inversedBy="commandes")
+     */
+    private $paymentMethod;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\CommandeStat", inversedBy="commandes")
+     */
+    private $commandStat;
+
 
 
 
@@ -98,6 +113,42 @@ class Commande
                 $ligneCommande->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDeliveryMethod(): ?DeliveryMethod
+    {
+        return $this->deliveryMethod;
+    }
+
+    public function setDeliveryMethod(?DeliveryMethod $deliveryMethod): self
+    {
+        $this->deliveryMethod = $deliveryMethod;
+
+        return $this;
+    }
+
+    public function getPaymentMethod(): ?PaymentMethod
+    {
+        return $this->paymentMethod;
+    }
+
+    public function setPaymentMethod(?PaymentMethod $paymentMethod): self
+    {
+        $this->paymentMethod = $paymentMethod;
+
+        return $this;
+    }
+
+    public function getCommandStat(): ?CommandeStat
+    {
+        return $this->commandStat;
+    }
+
+    public function setCommandStat(?CommandeStat $commandStat): self
+    {
+        $this->commandStat = $commandStat;
 
         return $this;
     }
