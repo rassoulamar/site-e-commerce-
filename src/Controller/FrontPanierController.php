@@ -68,7 +68,25 @@ class FrontPanierController extends AbstractController
 
         $session->set('panier', $panier);
         $session->set('quantiteGlobale', $quantiteGlobale);
-//
+
+
+        return new Response($quantiteGlobale);
+    }
+
+    /**
+     * @return Response
+     * @Route("/panier/reset-panier", name="reset-panier")
+     */
+    public function resetPanier(){
+
+        $session = $this->get('session');
+        $panier= [];
+        $session->set('panier', $panier);
+        $session->set('quantiteGlobale', 0);
+        return new Response();
+
+    }
+    //
 //        $quantite = $panier[$produitId]['quantite'];
 //
 //        // Insertion en base
@@ -100,23 +118,5 @@ class FrontPanierController extends AbstractController
 //
 //        $entityManager->persist($panierProduct);
 //        $entityManager->flush();
-
-        return new Response($quantiteGlobale);
-    }
-
-    /**
-     * @param Request $request
-     * @return Response
-     * @Route("/panier/reset-panier", name="reset-panier")
-     */
-    public function resetPanier(){
-
-        $session = $this->get('session');
-        $panier= [];
-        $session->set('panier', $panier);
-        $session->set('quantiteGlobale', 0);
-        return new Response();
-
-    }
 }
 

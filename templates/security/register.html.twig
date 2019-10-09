@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="m-4 col-5 mx-auto ">
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_start(form) }}
     <h3>Créer un compte </h3>
         {{ form_row(form.firstName,{label:"Nom",attr:{'placeholder': 'Entrez votre nom'}}) }}
         {{ form_row(form.lastName,{label:"Prénom",attr:{'placeholder': 'Entrez votre prénom'}}) }}
